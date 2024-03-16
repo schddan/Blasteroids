@@ -1,6 +1,8 @@
 {
     "files.associations": {
-        "allegro.h": "c"
+        "allegro.h": "c",
+        "color.h": "c",
+        "allegro_font.h": "c"
     },
     "cmake.sourceDirectory": "/home/dan/Documentos/Blasteroids/src"
 }
