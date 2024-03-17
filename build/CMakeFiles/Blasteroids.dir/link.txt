@@ -1,1 +1,1 @@
-/usr/bin/cc CMakeFiles/Blasteroids.dir/blast.c.o CMakeFiles/Blasteroids.dir/asteroid.c.o CMakeFiles/Blasteroids.dir/main.c.o CMakeFiles/Blasteroids.dir/spaceship.c.o -o Blasteroids  /usr/lib/x86_64-linux-gnu/liballegro.so /usr/lib/x86_64-linux-gnu/liballegro_font.so 
+/usr/bin/gcc -g CMakeFiles/Blasteroids.dir/blast.c.o CMakeFiles/Blasteroids.dir/asteroid.c.o CMakeFiles/Blasteroids.dir/main.c.o CMakeFiles/Blasteroids.dir/spaceship.c.o -o Blasteroids  /usr/lib/x86_64-linux-gnu/liballegro.so /usr/lib/x86_64-linux-gnu/liballegro_primitives.so 

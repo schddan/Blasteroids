@@ -73,57 +73,57 @@ CMakeFiles/Blasteroids.dir/blast.c.o: CMakeFiles/Blasteroids.dir/flags.make
 CMakeFiles/Blasteroids.dir/blast.c.o: /home/dan/Documentos/Blasteroids/src/blast.c
 CMakeFiles/Blasteroids.dir/blast.c.o: CMakeFiles/Blasteroids.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dan/Documentos/Blasteroids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/Blasteroids.dir/blast.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Blasteroids.dir/blast.c.o -MF CMakeFiles/Blasteroids.dir/blast.c.o.d -o CMakeFiles/Blasteroids.dir/blast.c.o -c /home/dan/Documentos/Blasteroids/src/blast.c
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Blasteroids.dir/blast.c.o -MF CMakeFiles/Blasteroids.dir/blast.c.o.d -o CMakeFiles/Blasteroids.dir/blast.c.o -c /home/dan/Documentos/Blasteroids/src/blast.c
 
 CMakeFiles/Blasteroids.dir/blast.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Blasteroids.dir/blast.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/dan/Documentos/Blasteroids/src/blast.c > CMakeFiles/Blasteroids.dir/blast.c.i
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/dan/Documentos/Blasteroids/src/blast.c > CMakeFiles/Blasteroids.dir/blast.c.i
 
 CMakeFiles/Blasteroids.dir/blast.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Blasteroids.dir/blast.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/dan/Documentos/Blasteroids/src/blast.c -o CMakeFiles/Blasteroids.dir/blast.c.s
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/dan/Documentos/Blasteroids/src/blast.c -o CMakeFiles/Blasteroids.dir/blast.c.s
 
 CMakeFiles/Blasteroids.dir/asteroid.c.o: CMakeFiles/Blasteroids.dir/flags.make
 CMakeFiles/Blasteroids.dir/asteroid.c.o: /home/dan/Documentos/Blasteroids/src/asteroid.c
 CMakeFiles/Blasteroids.dir/asteroid.c.o: CMakeFiles/Blasteroids.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dan/Documentos/Blasteroids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/Blasteroids.dir/asteroid.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Blasteroids.dir/asteroid.c.o -MF CMakeFiles/Blasteroids.dir/asteroid.c.o.d -o CMakeFiles/Blasteroids.dir/asteroid.c.o -c /home/dan/Documentos/Blasteroids/src/asteroid.c
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Blasteroids.dir/asteroid.c.o -MF CMakeFiles/Blasteroids.dir/asteroid.c.o.d -o CMakeFiles/Blasteroids.dir/asteroid.c.o -c /home/dan/Documentos/Blasteroids/src/asteroid.c
 
 CMakeFiles/Blasteroids.dir/asteroid.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Blasteroids.dir/asteroid.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/dan/Documentos/Blasteroids/src/asteroid.c > CMakeFiles/Blasteroids.dir/asteroid.c.i
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/dan/Documentos/Blasteroids/src/asteroid.c > CMakeFiles/Blasteroids.dir/asteroid.c.i
 
 CMakeFiles/Blasteroids.dir/asteroid.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Blasteroids.dir/asteroid.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/dan/Documentos/Blasteroids/src/asteroid.c -o CMakeFiles/Blasteroids.dir/asteroid.c.s
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/dan/Documentos/Blasteroids/src/asteroid.c -o CMakeFiles/Blasteroids.dir/asteroid.c.s
 
 CMakeFiles/Blasteroids.dir/main.c.o: CMakeFiles/Blasteroids.dir/flags.make
 CMakeFiles/Blasteroids.dir/main.c.o: /home/dan/Documentos/Blasteroids/src/main.c
 CMakeFiles/Blasteroids.dir/main.c.o: CMakeFiles/Blasteroids.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dan/Documentos/Blasteroids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/Blasteroids.dir/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Blasteroids.dir/main.c.o -MF CMakeFiles/Blasteroids.dir/main.c.o.d -o CMakeFiles/Blasteroids.dir/main.c.o -c /home/dan/Documentos/Blasteroids/src/main.c
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Blasteroids.dir/main.c.o -MF CMakeFiles/Blasteroids.dir/main.c.o.d -o CMakeFiles/Blasteroids.dir/main.c.o -c /home/dan/Documentos/Blasteroids/src/main.c
 
 CMakeFiles/Blasteroids.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Blasteroids.dir/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/dan/Documentos/Blasteroids/src/main.c > CMakeFiles/Blasteroids.dir/main.c.i
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/dan/Documentos/Blasteroids/src/main.c > CMakeFiles/Blasteroids.dir/main.c.i
 
 CMakeFiles/Blasteroids.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Blasteroids.dir/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/dan/Documentos/Blasteroids/src/main.c -o CMakeFiles/Blasteroids.dir/main.c.s
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/dan/Documentos/Blasteroids/src/main.c -o CMakeFiles/Blasteroids.dir/main.c.s
 
 CMakeFiles/Blasteroids.dir/spaceship.c.o: CMakeFiles/Blasteroids.dir/flags.make
 CMakeFiles/Blasteroids.dir/spaceship.c.o: /home/dan/Documentos/Blasteroids/src/spaceship.c
 CMakeFiles/Blasteroids.dir/spaceship.c.o: CMakeFiles/Blasteroids.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dan/Documentos/Blasteroids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/Blasteroids.dir/spaceship.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Blasteroids.dir/spaceship.c.o -MF CMakeFiles/Blasteroids.dir/spaceship.c.o.d -o CMakeFiles/Blasteroids.dir/spaceship.c.o -c /home/dan/Documentos/Blasteroids/src/spaceship.c
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Blasteroids.dir/spaceship.c.o -MF CMakeFiles/Blasteroids.dir/spaceship.c.o.d -o CMakeFiles/Blasteroids.dir/spaceship.c.o -c /home/dan/Documentos/Blasteroids/src/spaceship.c
 
 CMakeFiles/Blasteroids.dir/spaceship.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Blasteroids.dir/spaceship.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/dan/Documentos/Blasteroids/src/spaceship.c > CMakeFiles/Blasteroids.dir/spaceship.c.i
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/dan/Documentos/Blasteroids/src/spaceship.c > CMakeFiles/Blasteroids.dir/spaceship.c.i
 
 CMakeFiles/Blasteroids.dir/spaceship.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Blasteroids.dir/spaceship.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/dan/Documentos/Blasteroids/src/spaceship.c -o CMakeFiles/Blasteroids.dir/spaceship.c.s
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/dan/Documentos/Blasteroids/src/spaceship.c -o CMakeFiles/Blasteroids.dir/spaceship.c.s
 
 # Object files for target Blasteroids
 Blasteroids_OBJECTS = \
@@ -141,7 +141,7 @@ Blasteroids: CMakeFiles/Blasteroids.dir/main.c.o
 Blasteroids: CMakeFiles/Blasteroids.dir/spaceship.c.o
 Blasteroids: CMakeFiles/Blasteroids.dir/build.make
 Blasteroids: /usr/lib/x86_64-linux-gnu/liballegro.so
-Blasteroids: /usr/lib/x86_64-linux-gnu/liballegro_font.so
+Blasteroids: /usr/lib/x86_64-linux-gnu/liballegro_primitives.so
 Blasteroids: CMakeFiles/Blasteroids.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dan/Documentos/Blasteroids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable Blasteroids"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Blasteroids.dir/link.txt --verbose=$(VERBOSE)

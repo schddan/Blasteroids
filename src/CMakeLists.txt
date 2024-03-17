@@ -3,7 +3,7 @@ project(Blasteroids C)
 
 include_directories(/usr/include/allegro5/)
 link_libraries(/usr/lib/x86_64-linux-gnu/liballegro.so)
-link_libraries(/usr/lib/x86_64-linux-gnu/liballegro_font.so)
+link_libraries(/usr/lib/x86_64-linux-gnu/liballegro_primitives.so)
 
 add_executable(Blasteroids)
 
@@ -14,6 +14,9 @@ target_sources(
         asteroid.c
         main.c
         spaceship.c
+        blast.h
+        asteroid.h
+        spaceship.h
 )
 
 

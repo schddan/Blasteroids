@@ -1,4 +1,9 @@
-typedef struct spaceship
+#ifndef _SPACESHIP_H
+#define _SPACESHIP_H
+
+#include <allegro5/allegro.h>
+
+struct spaceship
 {
     float sx; //Screen x
     float sy; //Screen y
@@ -6,4 +11,8 @@ typedef struct spaceship
     float speed; 
     int gone; //Alive?
     ALLEGRO_COLOR color;
-} spaceship;
+};
+
+typedef struct spaceship spaceship;
+
+#endif
