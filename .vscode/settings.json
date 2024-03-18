@@ -2,7 +2,8 @@
     "files.associations": {
         "allegro.h": "c",
         "color.h": "c",
-        "allegro_font.h": "c"
+        "allegro_font.h": "c",
+        "allegro_primitives.h": "c"
     },
     "cmake.sourceDirectory": "/home/dan/Documentos/Blasteroids/src",
     "C_Cpp.default.compilerPath": "/usr/bin/gcc"
