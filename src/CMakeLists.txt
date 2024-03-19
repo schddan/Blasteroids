@@ -17,6 +17,7 @@ target_sources(
         blast.h
         asteroid.h
         spaceship.h
+        consts.h
 )
 
 

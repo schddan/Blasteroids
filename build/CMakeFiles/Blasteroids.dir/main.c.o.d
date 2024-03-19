@@ -105,4 +105,5 @@ CMakeFiles/Blasteroids.dir/main.c.o: \
  /usr/include/allegro5/allegro_primitives.h \
  /home/dan/Documentos/Blasteroids/src/spaceship.h \
  /home/dan/Documentos/Blasteroids/src/blast.h \
- /home/dan/Documentos/Blasteroids/src/asteroid.h
+ /home/dan/Documentos/Blasteroids/src/asteroid.h \
+ /home/dan/Documentos/Blasteroids/src/consts.h

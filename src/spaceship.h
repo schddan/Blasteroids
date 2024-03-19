@@ -15,4 +15,6 @@ struct spaceship
 
 typedef struct spaceship spaceship;
 
+void drawShip(int x, int y, spaceship* spaceship);
+
 #endif

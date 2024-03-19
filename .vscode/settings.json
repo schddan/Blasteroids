@@ -3,7 +3,9 @@
         "allegro.h": "c",
         "color.h": "c",
         "allegro_font.h": "c",
-        "allegro_primitives.h": "c"
+        "allegro_primitives.h": "c",
+        "spaceship.h": "c",
+        "math.h": "c"
     },
     "cmake.sourceDirectory": "/home/dan/Documentos/Blasteroids/src",
     "C_Cpp.default.compilerPath": "/usr/bin/gcc"

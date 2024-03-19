@@ -417,7 +417,8 @@ CMakeFiles/Blasteroids.dir/main.c.o: /home/dan/Documentos/Blasteroids/src/main.c
   /usr/include/allegro5/allegro_primitives.h \
   /home/dan/Documentos/Blasteroids/src/spaceship.h \
   /home/dan/Documentos/Blasteroids/src/blast.h \
-  /home/dan/Documentos/Blasteroids/src/asteroid.h
+  /home/dan/Documentos/Blasteroids/src/asteroid.h \
+  /home/dan/Documentos/Blasteroids/src/consts.h
 
 CMakeFiles/Blasteroids.dir/spaceship.c.o: /home/dan/Documentos/Blasteroids/src/spaceship.c \
   /usr/include/stdc-predef.h \
@@ -563,7 +564,9 @@ CMakeFiles/Blasteroids.dir/spaceship.c.o: /home/dan/Documentos/Blasteroids/src/s
   /usr/include/allegro5/tls.h \
   /usr/include/allegro5/alcompat.h \
   /usr/include/allegro5/platform/alunix.h \
-  /home/dan/Documentos/Blasteroids/src/asteroid.h
+  /usr/include/allegro5/allegro_primitives.h \
+  /home/dan/Documentos/Blasteroids/src/spaceship.h \
+  /home/dan/Documentos/Blasteroids/src/consts.h
 
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
@@ -573,6 +576,8 @@ CMakeFiles/Blasteroids.dir/spaceship.c.o: /home/dan/Documentos/Blasteroids/src/s
 /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
+
+/home/dan/Documentos/Blasteroids/src/consts.h:
 
 /usr/include/allegro5/allegro_primitives.h:
 
