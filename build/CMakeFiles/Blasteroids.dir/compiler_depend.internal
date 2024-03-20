@@ -139,6 +139,7 @@ CMakeFiles/Blasteroids.dir/asteroid.c.o
  /usr/include/allegro5/tls.h
  /usr/include/allegro5/alcompat.h
  /usr/include/allegro5/platform/alunix.h
+ /usr/include/allegro5/allegro_primitives.h
 
 CMakeFiles/Blasteroids.dir/blast.c.o
  /home/dan/Documentos/Blasteroids/src/blast.c

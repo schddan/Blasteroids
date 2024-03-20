@@ -18,5 +18,7 @@ struct asteroid
 
 typedef struct asteroid asteroid;
 
+void drawAsteroid(float x, float y);
+
 #endif
 

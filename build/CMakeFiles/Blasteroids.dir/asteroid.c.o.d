@@ -102,4 +102,5 @@ CMakeFiles/Blasteroids.dir/asteroid.c.o: \
  /usr/include/allegro5/transformations.h /usr/include/allegro5/system.h \
  /usr/include/allegro5/threads.h /usr/include/allegro5/timer.h \
  /usr/include/allegro5/tls.h /usr/include/allegro5/alcompat.h \
- /usr/include/allegro5/platform/alunix.h
+ /usr/include/allegro5/platform/alunix.h \
+ /usr/include/allegro5/allegro_primitives.h

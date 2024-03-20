@@ -137,7 +137,8 @@ CMakeFiles/Blasteroids.dir/asteroid.c.o: /home/dan/Documentos/Blasteroids/src/as
   /usr/include/allegro5/timer.h \
   /usr/include/allegro5/tls.h \
   /usr/include/allegro5/alcompat.h \
-  /usr/include/allegro5/platform/alunix.h
+  /usr/include/allegro5/platform/alunix.h \
+  /usr/include/allegro5/allegro_primitives.h
 
 CMakeFiles/Blasteroids.dir/blast.c.o: /home/dan/Documentos/Blasteroids/src/blast.c \
   /usr/include/stdc-predef.h \
@@ -579,8 +580,6 @@ CMakeFiles/Blasteroids.dir/spaceship.c.o: /home/dan/Documentos/Blasteroids/src/s
 
 /home/dan/Documentos/Blasteroids/src/consts.h:
 
-/usr/include/allegro5/allegro_primitives.h:
-
 /usr/include/allegro5/allegro_font.h:
 
 /home/dan/Documentos/Blasteroids/src/main.c:
@@ -588,6 +587,8 @@ CMakeFiles/Blasteroids.dir/spaceship.c.o: /home/dan/Documentos/Blasteroids/src/s
 /home/dan/Documentos/Blasteroids/src/blast.h:
 
 /home/dan/Documentos/Blasteroids/src/blast.c:
+
+/usr/include/allegro5/allegro_primitives.h:
 
 /usr/include/allegro5/platform/alunix.h:
 
