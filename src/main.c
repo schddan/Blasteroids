@@ -6,15 +6,6 @@
 #include "asteroid.h"
 #include "consts.h"
 
-void createSpaceship(spaceship * spaceship, ALLEGRO_COLOR color){
-    spaceship->color = color;
-    spaceship->gone = 0;
-    spaceship->sx = DISPLAY_WIDTH/2;
-    spaceship->sy = DISPLAY_HEIGHT/2;
-    spaceship->speed = 0;
-    spaceship->heading = 0;
-}
-
 int main (){
 
     //Allegro configs
@@ -73,7 +64,20 @@ int main (){
 
         if(event.type == ALLEGRO_EVENT_TIMER){
             al_clear_to_color(al_map_rgb(0,0,0));
+            al_draw_line(0, 2, 3, 5, al_map_rgb(255, 255, 255), 3);
             drawShip(x, y, pSpaceship1);
+            al_draw_line(-20,20, -25, 5, al_map_rgb(255, 255, 255), 3.0f);
+            al_draw_line(-25,5, -25, -10, al_map_rgb(255, 255, 255), 3.0f);
+            al_draw_line(-25,-10, -5, -10, al_map_rgb(255, 255, 255), 3.0f);
+            al_draw_line(-5, -10, -10, -20, al_map_rgb(255, 255, 255), 3.0f);
+            al_draw_line(-10, -20, 5, -20, al_map_rgb(255, 255, 255), 3.0f);
+            al_draw_line(5, -20, 20, -10, al_map_rgb(255, 255, 255), 3.0f);
+            al_draw_line(20, -10, 20, -5, al_map_rgb(255, 255, 255), 3.0f);
+            al_draw_line(20,-5, 0, -0, al_map_rgb(255, 255, 255), 3.0f);
+            al_draw_line(0,0, 20, 10, al_map_rgb(255, 255, 255), 3.0f);
+            al_draw_line(20,10, 10, 20, al_map_rgb(255, 255, 255), 3.0f);
+            al_draw_line(10,20, 0, 15, al_map_rgb(255, 255, 255), 3.0f);
+            al_draw_line(0,15, -20, 20, al_map_rgb(255, 255, 255), 3.0f);
             al_flip_display();
             
         }

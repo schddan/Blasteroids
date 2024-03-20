@@ -15,3 +15,12 @@ void drawShip(int x, int y, spaceship* spaceship){
     al_draw_line(-6,4, -1, 4, spaceship->color, 3.0f);
     al_draw_line(6,4, 1, 4, spaceship->color, 3.0f);
 }
+
+void createSpaceship(spaceship * spaceship, ALLEGRO_COLOR color){
+    spaceship->color = color;
+    spaceship->gone = 0;
+    spaceship->sx = DISPLAY_WIDTH/2;
+    spaceship->sy = DISPLAY_HEIGHT/2;
+    spaceship->speed = 0;
+    spaceship->heading = 0;
+}
