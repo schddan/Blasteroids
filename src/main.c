@@ -49,21 +49,25 @@ int main (){
         ALLEGRO_KEYBOARD_STATE keystate;
         al_get_keyboard_state(&keystate);
 
-        if(al_key_down(&keystate, ALLEGRO_KEY_D)){
-            x += 1;
+        if(event.type == ALLEGRO_EVENT_KEY_DOWN){
+            switch(event.keyboard.keycode){
+                case ALLEGRO_KEY_D:
+                    Spaceship1.heading += 0.1;
+                    break;
+                case ALLEGRO_KEY_A:
+                    Spaceship1.heading -= 0.1;
+                    break;
+            }
         }
-        if(al_key_down(&keystate, ALLEGRO_KEY_A)){
-            x -= 1;
-        }
+        
         if(al_key_down(&keystate, ALLEGRO_KEY_W)){
-            y -= 1;
+            Spaceship1.sy -= 1;
         }
         if(al_key_down(&keystate, ALLEGRO_KEY_S)){
-            y += 1;
+            Spaceship1.sy += 1;
         }
         if(event.type == ALLEGRO_EVENT_TIMER){
             al_clear_to_color(al_map_rgb(0,0,0));
-            al_draw_line(0, 2, 3, 5, al_map_rgb(255, 255, 255), 3);
             drawShip(x, y, pSpaceship1);
             drawAsteroid(astX, astY);
             al_flip_display();
