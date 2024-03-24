@@ -8,7 +8,7 @@ struct asteroid
     float sx;
     float sy;
     float heading; //Direction
-    float twist; //Current rotation
+    int rotationDirection;
     float speed; 
     float rotVelocity; //Rotation velocity per frame
     float scale; //Factor to change sizes
@@ -18,7 +18,8 @@ struct asteroid
 
 typedef struct asteroid asteroid;
 
-void drawAsteroid(float x, float y);
+void drawAsteroid(asteroid * asteroid);
+void createAsteroid(asteroid * asteroid, ALLEGRO_COLOR color);
 
 #endif
 

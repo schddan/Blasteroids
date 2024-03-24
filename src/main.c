@@ -7,10 +7,6 @@
 #include "asteroid.h"
 #include "consts.h"
 
-
-enum KEYS{W, S, A, D, SPACE};
-int key[5] = {false, false, false, false, false};
-
 int main (){
 
     //Allegro configs
@@ -40,6 +36,7 @@ int main (){
 
     asteroid Asteroid1;
     asteroid* pAsteroid1 = &Asteroid1; 
+    createAsteroid(pAsteroid1, al_map_rgb(0,0,254));
 
     int running = 1;
 
@@ -67,14 +64,15 @@ int main (){
                 Spaceship1.sx -= Spaceship1.speed * sin(Spaceship1.heading);
             }
             if(al_key_down(&keystate, ALLEGRO_KEY_A)){
-                Spaceship1.heading -= 0.05;
+                Spaceship1.heading -= 0.07;
             }
             if(al_key_down(&keystate, ALLEGRO_KEY_D)){
-                Spaceship1.heading += 0.05;
+                Spaceship1.heading += 0.07;
             }
 
             al_clear_to_color(al_map_rgb(0,0,0));
             drawShip(pSpaceship1);
+            drawAsteroid(pAsteroid1);
             al_flip_display();
             astY += asteroidVelocity;
             astX += asteroidVelocity;
