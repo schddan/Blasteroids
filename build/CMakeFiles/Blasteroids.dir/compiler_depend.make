@@ -416,6 +416,14 @@ CMakeFiles/Blasteroids.dir/main.c.o: /home/dan/Documentos/Blasteroids/src/main.c
   /usr/include/allegro5/platform/alunix.h \
   /usr/include/allegro5/allegro_font.h \
   /usr/include/allegro5/allegro_primitives.h \
+  /usr/include/math.h \
+  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
+  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
+  /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
+  /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
+  /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
   /home/dan/Documentos/Blasteroids/src/spaceship.h \
   /home/dan/Documentos/Blasteroids/src/blast.h \
   /home/dan/Documentos/Blasteroids/src/asteroid.h \
@@ -580,9 +588,25 @@ CMakeFiles/Blasteroids.dir/spaceship.c.o: /home/dan/Documentos/Blasteroids/src/s
 
 /home/dan/Documentos/Blasteroids/src/consts.h:
 
+/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
+
+/usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
+
+/usr/include/x86_64-linux-gnu/bits/fp-fast.h:
+
+/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
+
+/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
+
+/usr/include/x86_64-linux-gnu/bits/math-vector.h:
+
+/usr/include/math.h:
+
 /usr/include/allegro5/allegro_font.h:
 
 /home/dan/Documentos/Blasteroids/src/main.c:
+
+/usr/include/x86_64-linux-gnu/bits/fp-logb.h:
 
 /home/dan/Documentos/Blasteroids/src/blast.h:
 

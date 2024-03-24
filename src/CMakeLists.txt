@@ -21,3 +21,4 @@ target_sources(
 )
 
 
+target_link_libraries(Blasteroids PRIVATE -lm)

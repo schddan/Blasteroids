@@ -1,10 +1,15 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_primitives.h>
+#include <math.h>
 #include "spaceship.h"
 #include "blast.h"
 #include "asteroid.h"
 #include "consts.h"
+
+
+enum KEYS{W, S, A, D, SPACE};
+int key[5] = {false, false, false, false, false};
 
 int main (){
 
@@ -31,17 +36,20 @@ int main (){
     //Main game loop
     spaceship Spaceship1;
     spaceship* pSpaceship1 = &Spaceship1;
-    createSpaceship(pSpaceship1, al_map_rgb(0, 255, 0));
+    createSpaceship(pSpaceship1, al_map_rgb(0, 255, 0), 2);
+
+    asteroid Asteroid1;
+    asteroid* pAsteroid1 = &Asteroid1; 
 
     int running = 1;
 
-    int x = 0, y = 0, asteroidVelocity = 1, astX = 6, astY = 2;
-    
+    int asteroidVelocity = 1, astX = 6, astY = 2;
     al_start_timer(timer);
     while(running){
 
         ALLEGRO_EVENT event;
         al_wait_for_event(queue, &event);
+        
         if(event.type == ALLEGRO_EVENT_DISPLAY_CLOSE){ //Handles if the window is closed
             running = 0;
         }
@@ -49,27 +57,24 @@ int main (){
         ALLEGRO_KEYBOARD_STATE keystate;
         al_get_keyboard_state(&keystate);
 
-        if(event.type == ALLEGRO_EVENT_KEY_DOWN){
-            switch(event.keyboard.keycode){
-                case ALLEGRO_KEY_D:
-                    Spaceship1.heading += 0.1;
-                    break;
-                case ALLEGRO_KEY_A:
-                    Spaceship1.heading -= 0.1;
-                    break;
-            }
-        }
-        
-        if(al_key_down(&keystate, ALLEGRO_KEY_W)){
-            Spaceship1.sy -= 1;
-        }
-        if(al_key_down(&keystate, ALLEGRO_KEY_S)){
-            Spaceship1.sy += 1;
-        }
         if(event.type == ALLEGRO_EVENT_TIMER){
+            if(al_key_down(&keystate, ALLEGRO_KEY_W)){
+                Spaceship1.sy -= Spaceship1.speed * cos(Spaceship1.heading);
+                Spaceship1.sx += Spaceship1.speed * sin(Spaceship1.heading);
+            }
+            if(al_key_down(&keystate, ALLEGRO_KEY_S)){
+                Spaceship1.sy += Spaceship1.speed * cos(Spaceship1.heading);
+                Spaceship1.sx -= Spaceship1.speed * sin(Spaceship1.heading);
+            }
+            if(al_key_down(&keystate, ALLEGRO_KEY_A)){
+                Spaceship1.heading -= 0.05;
+            }
+            if(al_key_down(&keystate, ALLEGRO_KEY_D)){
+                Spaceship1.heading += 0.05;
+            }
+
             al_clear_to_color(al_map_rgb(0,0,0));
-            drawShip(x, y, pSpaceship1);
-            drawAsteroid(astX, astY);
+            drawShip(pSpaceship1);
             al_flip_display();
             astY += asteroidVelocity;
             astX += asteroidVelocity;
