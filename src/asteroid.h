@@ -19,7 +19,8 @@ struct asteroid
 typedef struct asteroid asteroid;
 
 void drawAsteroid(asteroid * asteroid);
-void createAsteroid(asteroid * asteroid, ALLEGRO_COLOR color);
+asteroid createAsteroid(ALLEGRO_COLOR color);
+asteroid * createAsteroidGroup(int quantity);
 
 #endif
 

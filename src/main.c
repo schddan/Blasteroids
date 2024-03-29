@@ -6,6 +6,7 @@
 #include "blast.h"
 #include "asteroid.h"
 #include "consts.h"
+#include <stdio.h>
 
 int main (){
 
@@ -34,13 +35,10 @@ int main (){
     spaceship* pSpaceship1 = &Spaceship1;
     createSpaceship(pSpaceship1, al_map_rgb(0, 255, 0), 2);
 
-    asteroid Asteroid1;
-    asteroid* pAsteroid1 = &Asteroid1; 
-    createAsteroid(pAsteroid1, al_map_rgb(0,0,254));
+    asteroid * asteroidGroup = createAsteroidGroup(3);
 
     int running = 1;
 
-    int asteroidVelocity = 1, astX = 6, astY = 2;
     al_start_timer(timer);
     while(running){
 
@@ -69,17 +67,18 @@ int main (){
             if(al_key_down(&keystate, ALLEGRO_KEY_D)){
                 Spaceship1.heading += 0.07;
             }
-
+            asteroidGroup[1].rotVelocity += 0.07;
+            asteroidGroup[1].heading = -2;
+            asteroidGroup[1].sx += asteroidGroup[1].speed * sin(asteroidGroup[1].heading);
+            asteroidGroup[1].sy += asteroidGroup[1].speed * cos(asteroidGroup[1].heading);
             al_clear_to_color(al_map_rgb(0,0,0));
+            drawAsteroid(&asteroidGroup[1]);
             drawShip(pSpaceship1);
-            drawAsteroid(pAsteroid1);
             al_flip_display();
-            astY += asteroidVelocity;
-            astX += asteroidVelocity;
         }
 
     }
-
+    free(asteroidGroup);
     al_destroy_display(display);
     al_uninstall_keyboard();
     al_destroy_timer(timer);

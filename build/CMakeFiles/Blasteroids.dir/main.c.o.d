@@ -113,4 +113,11 @@ CMakeFiles/Blasteroids.dir/main.c.o: \
  /home/dan/Documentos/Blasteroids/src/spaceship.h \
  /home/dan/Documentos/Blasteroids/src/blast.h \
  /home/dan/Documentos/Blasteroids/src/asteroid.h \
- /home/dan/Documentos/Blasteroids/src/consts.h
+ /home/dan/Documentos/Blasteroids/src/consts.h /usr/include/stdio.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
+ /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
+ /usr/include/x86_64-linux-gnu/bits/stdio_lim.h
