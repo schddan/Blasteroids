@@ -104,4 +104,11 @@ CMakeFiles/Blasteroids.dir/asteroid.c.o: \
  /usr/include/allegro5/tls.h /usr/include/allegro5/alcompat.h \
  /usr/include/allegro5/platform/alunix.h \
  /usr/include/allegro5/allegro_primitives.h \
- /home/dan/Documentos/Blasteroids/src/consts.h
+ /home/dan/Documentos/Blasteroids/src/consts.h /usr/include/math.h \
+ /usr/include/x86_64-linux-gnu/bits/math-vector.h \
+ /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
+ /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
+ /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
+ /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls.h

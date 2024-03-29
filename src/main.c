@@ -67,12 +67,15 @@ int main (){
             if(al_key_down(&keystate, ALLEGRO_KEY_D)){
                 Spaceship1.heading += 0.07;
             }
-            asteroidGroup[1].rotVelocity += 0.07;
             asteroidGroup[1].heading = -2;
-            asteroidGroup[1].sx += asteroidGroup[1].speed * sin(asteroidGroup[1].heading);
-            asteroidGroup[1].sy += asteroidGroup[1].speed * cos(asteroidGroup[1].heading);
+
+            
+            asteroidGroup[2].heading = -2;
+
+
             al_clear_to_color(al_map_rgb(0,0,0));
             drawAsteroid(&asteroidGroup[1]);
+            drawAsteroid(&asteroidGroup[2]);
             drawShip(pSpaceship1);
             al_flip_display();
         }

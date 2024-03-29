@@ -4,6 +4,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include "consts.h"
+#include <math.h>
 
 
 
@@ -25,17 +26,19 @@ void drawAsteroid(asteroid * asteroid){
     al_draw_line(20,10, 10, 20, asteroid->color, 3.0f);
     al_draw_line(10,20, 0, 15, asteroid->color, 3.0f);
     al_draw_line(0,15, -20, 20, asteroid->color, 3.0f);
+    asteroid->sx += asteroid->speed * sin(asteroid->heading);
+    asteroid->sy+= asteroid->speed * cos(asteroid->heading);
 }
 
 asteroid createAsteroid(ALLEGRO_COLOR color){
-    srand(time(NULL));
+
     asteroid asteroid;
     asteroid.sx = rand() % DISPLAY_WIDTH;
     asteroid.sy = DISPLAY_HEIGHT;
     asteroid.heading = 0;
     asteroid.rotationDirection = 0;
     asteroid.speed = 3;
-    asteroid.rotVelocity = 0;
+    asteroid.rotVelocity = 0.07;
     asteroid.scale = 0;
     asteroid.gone = 0;
     asteroid.color = color;
@@ -43,6 +46,7 @@ asteroid createAsteroid(ALLEGRO_COLOR color){
 }
 
 asteroid * createAsteroidGroup(int quantity){
+    srand(time(NULL));
     asteroid* asteroidGroup = (asteroid*)calloc(quantity * 7, sizeof(asteroid));
     for(int i = 0; i < quantity * 7; i++){
         asteroidGroup[i] = createAsteroid(al_map_rgb(0, 0, 255));
