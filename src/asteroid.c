@@ -31,13 +31,30 @@ void drawAsteroid(asteroid * asteroid){
 }
 
 asteroid createAsteroid(ALLEGRO_COLOR color){
-
     asteroid asteroid;
-    asteroid.sx = rand() % DISPLAY_WIDTH;
-    asteroid.sy = DISPLAY_HEIGHT;
-    asteroid.heading = 0;
+    int quadrant = rand() % 4 + 1; //random number beetween 1 to 4
+    switch (quadrant)
+    {
+    case 1:
+        asteroid.sx = rand() % DISPLAY_WIDTH;
+        asteroid.sy = 0;
+        break;
+    case 2:
+        asteroid.sx = DISPLAY_WIDTH;
+        asteroid.sy = rand() % DISPLAY_HEIGHT;
+        break;
+    case 3:
+        asteroid.sx = rand() % DISPLAY_WIDTH;
+        asteroid.sy = DISPLAY_HEIGHT;
+        break;
+    case 4:
+        asteroid.sx = 0;
+        asteroid.sy = rand() % DISPLAY_HEIGHT;
+        break;
+    }
+    asteroid.heading = (rand() % 8) - 4;
     asteroid.rotationDirection = 0;
-    asteroid.speed = 3;
+    asteroid.speed = 1;
     asteroid.rotVelocity = 0.07;
     asteroid.scale = 0;
     asteroid.gone = 0;

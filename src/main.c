@@ -35,7 +35,8 @@ int main (){
     spaceship* pSpaceship1 = &Spaceship1;
     createSpaceship(pSpaceship1, al_map_rgb(0, 255, 0), 2);
 
-    asteroid * asteroidGroup = createAsteroidGroup(3);
+    int bigAsteroidQuantity = 1;
+    asteroid * asteroidGroup = createAsteroidGroup(bigAsteroidQuantity);
 
     int running = 1;
 
@@ -67,16 +68,15 @@ int main (){
             if(al_key_down(&keystate, ALLEGRO_KEY_D)){
                 Spaceship1.heading += 0.07;
             }
-            asteroidGroup[1].heading = -2;
-
-            
-            asteroidGroup[2].heading = -2;
-
 
             al_clear_to_color(al_map_rgb(0,0,0));
-            drawAsteroid(&asteroidGroup[1]);
-            drawAsteroid(&asteroidGroup[2]);
+
             drawShip(pSpaceship1);
+
+            for(int i = 0; i < bigAsteroidQuantity * 7; i++){
+                drawAsteroid(&asteroidGroup[i]);
+            }
+            
             al_flip_display();
         }
 
