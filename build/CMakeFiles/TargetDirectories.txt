@@ -1,3 +1,0 @@
-/home/dan/Documentos/Blasteroids/build/CMakeFiles/Blasteroids.dir
-/home/dan/Documentos/Blasteroids/build/CMakeFiles/edit_cache.dir
-/home/dan/Documentos/Blasteroids/build/CMakeFiles/rebuild_cache.dir
