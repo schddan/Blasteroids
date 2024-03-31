@@ -8,6 +8,8 @@
 #include "consts.h"
 #include <stdio.h>
 
+
+
 int main (){
 
     //Allegro configs
@@ -35,7 +37,7 @@ int main (){
     spaceship* pSpaceship1 = &Spaceship1;
     createSpaceship(pSpaceship1, al_map_rgb(0, 255, 0), 2);
 
-    int bigAsteroidQuantity = 1;
+    int bigAsteroidQuantity = 3;
     asteroid * asteroidGroup = createAsteroidGroup(bigAsteroidQuantity);
 
     int running = 1;
@@ -72,7 +74,7 @@ int main (){
             al_clear_to_color(al_map_rgb(0,0,0));
 
             drawShip(pSpaceship1);
-
+            
             for(int i = 0; i < bigAsteroidQuantity * 7; i++){
                 drawAsteroid(&asteroidGroup[i]);
             }

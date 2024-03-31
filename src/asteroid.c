@@ -6,7 +6,9 @@
 #include "consts.h"
 #include <math.h>
 
-
+float RandomFloat(float min, float max){
+   return ((max - min) * ((float)rand() / RAND_MAX)) + min;
+}
 
 void drawAsteroid(asteroid * asteroid){
     ALLEGRO_TRANSFORM transform;
@@ -37,22 +39,25 @@ asteroid createAsteroid(ALLEGRO_COLOR color){
     {
     case 1:
         asteroid.sx = rand() % DISPLAY_WIDTH;
-        asteroid.sy = 0;
+        asteroid.sy = -40;
+        asteroid.heading = RandomFloat(-1.5, 1.5);
         break;
     case 2:
         asteroid.sx = DISPLAY_WIDTH;
         asteroid.sy = rand() % DISPLAY_HEIGHT;
+        asteroid.heading = RandomFloat(-3.1, 0);
         break;
     case 3:
         asteroid.sx = rand() % DISPLAY_WIDTH;
         asteroid.sy = DISPLAY_HEIGHT;
+        asteroid.heading = RandomFloat(1.6, 4.7);
         break;
     case 4:
         asteroid.sx = 0;
         asteroid.sy = rand() % DISPLAY_HEIGHT;
+        asteroid.heading = RandomFloat(0, 3.1);
         break;
     }
-    asteroid.heading = (rand() % 8) - 4;
     asteroid.rotationDirection = 0;
     asteroid.speed = 1;
     asteroid.rotVelocity = 0.07;
