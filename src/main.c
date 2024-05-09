@@ -7,7 +7,7 @@
 #include "asteroid.h"
 #include "consts.h"
 #include <stdio.h>
-
+#include "collisions.h"
 
 
 int main (){
@@ -76,12 +76,11 @@ int main (){
                 drawShip(pSpaceship1);
             }
             
-            for(int i = 0; i < bigAsteroidQuantity * 7; i++){
+            for(int i = 0; i < bigAsteroidQuantity ; i++){
                 drawAsteroid(&asteroidGroup[i]);
-                if((int)Spaceship1.sx == (int)asteroidGroup[i].sx && (int)Spaceship1.sy == (int)asteroidGroup[i].sy){
-                    Spaceship1.gone = 1;
-                }
             }
+            
+            checkSpaceshipCollision(pSpaceship1, asteroidGroup, bigAsteroidQuantity * 7);
             
             al_flip_display();
         }

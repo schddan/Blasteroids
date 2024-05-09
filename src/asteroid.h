@@ -13,6 +13,7 @@ struct asteroid
     float rotVelocity; //Rotation velocity per frame
     float scale; //Factor to change sizes
     int gone; //Gone?
+    int radius; //For collision detection
     ALLEGRO_COLOR color;
 };
 

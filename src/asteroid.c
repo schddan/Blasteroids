@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "consts.h"
 #include <math.h>
+#include <stdio.h>
 
 float RandomFloat(float min, float max){
    return ((max - min) * ((float)rand() / RAND_MAX)) + min;
@@ -39,11 +40,13 @@ void definePositionAndHeading(asteroid * asteroid){
 
 
 void drawAsteroid(asteroid * asteroid){
+    
     ALLEGRO_TRANSFORM transform;
     al_identity_transform(&transform);
     al_rotate_transform(&transform, asteroid->rotVelocity);
     al_translate_transform(&transform, asteroid->sx, asteroid->sy);
     al_use_transform(&transform);
+    //al_draw_filled_circle(0, 0, asteroid->radius, al_premul_rgba(255, 0, 0, 150));
     al_draw_line(-20,20, -25, 5, asteroid->color, 3.0f);
     al_draw_line(-25,5, -25, -10, asteroid->color, 3.0f);
     al_draw_line(-25,-10, -5, -10, asteroid->color, 3.0f);
@@ -58,20 +61,24 @@ void drawAsteroid(asteroid * asteroid){
     al_draw_line(0,15, -20, 20, asteroid->color, 3.0f);
     asteroid->sx += asteroid->speed * sin(asteroid->heading);
     asteroid->sy+= asteroid->speed * cos(asteroid->heading);
+    asteroid->rotVelocity += 0.05 * asteroid->rotationDirection;
     if(asteroid->sx > DISPLAY_WIDTH || asteroid->sx < 0 || asteroid->sy > DISPLAY_HEIGHT || asteroid -> sy < 0){
         definePositionAndHeading(asteroid);
     }
+    
 }
 
 asteroid createAsteroid(ALLEGRO_COLOR color){
     asteroid asteroid;
     definePositionAndHeading(&asteroid);
-    asteroid.rotationDirection = 0;
-    asteroid.speed = 0.1;
+    int randomDirection = rand() % 2 + 1;
+    asteroid.rotationDirection = (randomDirection == 1) ? 1 : -1; //If quadrant == 1, rotationDirection = 1, else rotationDirection = -1
+    asteroid.speed = 0.8;
     asteroid.rotVelocity = 0.07;
     asteroid.scale = 0;
     asteroid.gone = 0;
     asteroid.color = color;
+    asteroid.radius = 25;
     return asteroid;
 }
 

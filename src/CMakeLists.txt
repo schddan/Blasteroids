@@ -14,10 +14,12 @@ target_sources(
         asteroid.c
         main.c
         spaceship.c
+        collisions.c
         blast.h
         asteroid.h
         spaceship.h
         consts.h
+        collisions.h
 )
 
 
