@@ -37,6 +37,10 @@ int main (){
     spaceship* pSpaceship1 = &Spaceship1;
     createSpaceship(pSpaceship1, al_map_rgb(0, 255, 0), 2);
 
+    blast Blast1;
+    blast* pBlast1 = &Blast1;
+    createBlast(pBlast1);
+
     int bigAsteroidQuantity = 3;
     asteroid * asteroidGroup = createAsteroidGroup(bigAsteroidQuantity);
 
@@ -70,12 +74,22 @@ int main (){
             if(al_key_down(&keystate, ALLEGRO_KEY_D)){
                 Spaceship1.heading += 0.07;
             }
-
+            if(al_key_down(&keystate, ALLEGRO_KEY_SPACE)){
+                Blast1.gone = 0;
+                Blast1.sx = Spaceship1.sx;
+                Blast1.sy = Spaceship1.sy;
+                Blast1.heading = Spaceship1.heading;
+            }
+            
             al_clear_to_color(al_map_rgb(0,0,0));
             if(Spaceship1.gone != 1){
                 drawShip(pSpaceship1);
             }
-            
+            if(Blast1.gone != 1){
+                drawBlast(pBlast1, pSpaceship1);
+            }
+            Blast1.sy -= Blast1.speed * cos(Blast1.heading);
+            Blast1.sx += Blast1.speed * sin(Blast1.heading);
             for(int i = 0; i < bigAsteroidQuantity ; i++){
                 drawAsteroid(&asteroidGroup[i]);
             }
