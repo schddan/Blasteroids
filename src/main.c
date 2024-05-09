@@ -48,7 +48,7 @@ int main (){
         ALLEGRO_EVENT event;
         al_wait_for_event(queue, &event);
         
-        if(event.type == ALLEGRO_EVENT_DISPLAY_CLOSE){ //Handles if the window is closed
+        if(event.type == ALLEGRO_EVENT_DISPLAY_CLOSE ){ //Handles if the window is closed
             running = 0;
         }
 
@@ -72,11 +72,15 @@ int main (){
             }
 
             al_clear_to_color(al_map_rgb(0,0,0));
-
-            drawShip(pSpaceship1);
+            if(Spaceship1.gone != 1){
+                drawShip(pSpaceship1);
+            }
             
             for(int i = 0; i < bigAsteroidQuantity * 7; i++){
                 drawAsteroid(&asteroidGroup[i]);
+                if((int)Spaceship1.sx == (int)asteroidGroup[i].sx && (int)Spaceship1.sy == (int)asteroidGroup[i].sy){
+                    Spaceship1.gone = 1;
+                }
             }
             
             al_flip_display();

@@ -16,7 +16,7 @@ void definePositionAndHeading(asteroid * asteroid){
     {
     case 1:
         asteroid->sx = rand() % DISPLAY_WIDTH;
-        asteroid->sy = -40;
+        asteroid->sy = 0;
         asteroid->heading = RandomFloat(-1.5, 1.5);
         break;
     case 2:
@@ -67,7 +67,7 @@ asteroid createAsteroid(ALLEGRO_COLOR color){
     asteroid asteroid;
     definePositionAndHeading(&asteroid);
     asteroid.rotationDirection = 0;
-    asteroid.speed = 1;
+    asteroid.speed = 0.1;
     asteroid.rotVelocity = 0.07;
     asteroid.scale = 0;
     asteroid.gone = 0;
