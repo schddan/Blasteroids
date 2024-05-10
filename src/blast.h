@@ -11,6 +11,7 @@ struct blast
     float heading;
     float speed;
     int gone;
+    int radius;
     ALLEGRO_COLOR color;
 };
 
@@ -18,5 +19,6 @@ typedef struct blast blast;
 
 void drawBlast(blast *blast, spaceship *spaceship);
 void createBlast(blast *blast);
+void checkBlastCollision(blast*  blast, asteroid *asteroid, int asteroidQuantity);
 
 #endif

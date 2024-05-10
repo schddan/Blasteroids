@@ -86,12 +86,16 @@ int main (){
                 drawShip(pSpaceship1);
             }
             if(Blast1.gone != 1){
+                Blast1.sy -= Blast1.speed * cos(Blast1.heading);
+                Blast1.sx += Blast1.speed * sin(Blast1.heading);
                 drawBlast(pBlast1, pSpaceship1);
+                checkBlastCollision(pBlast1, asteroidGroup, bigAsteroidQuantity * 7);
             }
-            Blast1.sy -= Blast1.speed * cos(Blast1.heading);
-            Blast1.sx += Blast1.speed * sin(Blast1.heading);
+            
             for(int i = 0; i < bigAsteroidQuantity ; i++){
-                drawAsteroid(&asteroidGroup[i]);
+                if(asteroidGroup[i].gone == 0){
+                    drawAsteroid(&asteroidGroup[i]);
+                }
             }
             
             checkSpaceshipCollision(pSpaceship1, asteroidGroup, bigAsteroidQuantity * 7);
