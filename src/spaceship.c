@@ -32,7 +32,7 @@ void checkSpaceshipCollision(spaceship *spaceship, asteroid *asteroid, int aster
     float distance;
     for(int i = 0; i < asteroidQuantity; i++){
         distance = sqrt(pow(spaceship->sx - asteroid[i].sx, 2) + pow(spaceship->sy - asteroid[i].sy, 2));
-        if(distance < spaceship->radius + asteroid->radius){
+        if(distance < spaceship->radius + asteroid[i].radius && asteroid[i].gone == 0){
             spaceship->gone = 1;
         }
     }

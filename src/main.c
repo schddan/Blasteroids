@@ -92,14 +92,14 @@ int main (){
                 checkBlastCollision(pBlast1, asteroidGroup, bigAsteroidQuantity * 7);
             }
             
-            for(int i = 0; i < bigAsteroidQuantity ; i++){
+            for(int i = 0; i < bigAsteroidQuantity * 7; i++){
                 if(asteroidGroup[i].gone == 0){
                     drawAsteroid(&asteroidGroup[i]);
                 }
             }
             
             checkSpaceshipCollision(pSpaceship1, asteroidGroup, bigAsteroidQuantity * 7);
-            
+            checkAsteroidCollision(asteroidGroup, bigAsteroidQuantity * 7);
             al_flip_display();
         }
 

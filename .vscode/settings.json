@@ -7,7 +7,8 @@
         "spaceship.h": "c",
         "math.h": "c",
         "blast.h": "c",
-        "consts.h": "c"
+        "consts.h": "c",
+        "stdlib.h": "c"
     },
     "cmake.sourceDirectory": "/home/dan/Documentos/Blasteroids/src",
     "C_Cpp.default.compilerPath": "/usr/bin/gcc",
