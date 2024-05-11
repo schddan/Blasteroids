@@ -10,7 +10,15 @@
 void divideAsteroid(asteroid * asteroidGroup, int rootAsteroidIndex){
     if(rootAsteroidIndex == 0 || rootAsteroidIndex % 7 == 0){
         asteroidGroup[rootAsteroidIndex + 1].gone = 0;
+        asteroidGroup[rootAsteroidIndex + 1].sx = asteroidGroup[rootAsteroidIndex].sx + 25;
+        asteroidGroup[rootAsteroidIndex + 1].sy = asteroidGroup[rootAsteroidIndex].sy;
+        asteroidGroup[rootAsteroidIndex + 1].heading = 1.5;
+
         asteroidGroup[rootAsteroidIndex + 2].gone = 0;
+        asteroidGroup[rootAsteroidIndex + 2].sx = asteroidGroup[rootAsteroidIndex].sx - 25;
+        asteroidGroup[rootAsteroidIndex + 2].sy = asteroidGroup[rootAsteroidIndex].sy;
+        asteroidGroup[rootAsteroidIndex + 2].heading = -1.5;
+
     }
 }
 
@@ -22,25 +30,25 @@ void definePositionAndHeading(asteroid * asteroid){
     int quadrant = rand() % 4 + 1; //random number beetween 1 to 4
     switch (quadrant)
     {
-    case 1:
+    case 1: //Top
         asteroid->sx = rand() % DISPLAY_WIDTH;
         asteroid->sy = 0;
-        asteroid->heading = RandomFloat(-1.5, 1.5);
+        asteroid->heading = RandomFloat(3.1, 6.2); //180º to 360º
         break;
-    case 2:
+    case 2: //Right
         asteroid->sx = DISPLAY_WIDTH;
         asteroid->sy = rand() % DISPLAY_HEIGHT;
-        asteroid->heading = RandomFloat(-3.1, 0);
+        asteroid->heading = RandomFloat(1.5, 4.7); //90º to 270º
         break;
-    case 3:
+    case 3: //Bottom 
         asteroid->sx = rand() % DISPLAY_WIDTH;
         asteroid->sy = DISPLAY_HEIGHT;
-        asteroid->heading = RandomFloat(1.6, 4.7);
+        asteroid->heading = RandomFloat(0, 3.1); //0º to 180º
         break;
-    case 4:
+    case 4: //Left
         asteroid->sx = 0;
         asteroid->sy = rand() % DISPLAY_HEIGHT;
-        asteroid->heading = RandomFloat(0, 3.1);
+        asteroid->heading = RandomFloat(1.5, -1.5); //90º to -90º (270º)
         break;
     }
 }

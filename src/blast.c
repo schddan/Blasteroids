@@ -32,6 +32,7 @@ void checkBlastCollision(blast*  blast, asteroid *asteroid, int asteroidQuantity
         if(distance < blast->radius + asteroid[i].radius && asteroid[i].gone == 0){
             blast->gone = 1;
             asteroid[i].gone = 1;
+            divideAsteroid(asteroid, i);
         }
     }
 }
