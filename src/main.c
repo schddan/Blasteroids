@@ -76,7 +76,7 @@ int main (){
             }
             if(al_key_down(&keystate, ALLEGRO_KEY_SPACE)){
                 Blast1.gone = 0;
-                Blast1.sx = Spaceship1.sx;
+                Blast1.sx = Spaceship1.sx; 
                 Blast1.sy = Spaceship1.sy;
                 Blast1.heading = Spaceship1.heading;
             }
@@ -85,6 +85,11 @@ int main (){
             if(Spaceship1.gone != 1){
                 drawShip(pSpaceship1);
             }
+            for(int i = 0; i < bigAsteroidQuantity * 7; i++){
+                if(asteroidGroup[i].gone == 0){
+                    drawAsteroid(&asteroidGroup[i]);
+                }
+            }
             if(Blast1.gone != 1){
                 Blast1.sy -= Blast1.speed * cos(Blast1.heading);
                 Blast1.sx += Blast1.speed * sin(Blast1.heading);
@@ -92,11 +97,7 @@ int main (){
                 checkBlastCollision(pBlast1, asteroidGroup, bigAsteroidQuantity * 7);
             }
             
-            for(int i = 0; i < bigAsteroidQuantity * 7; i++){
-                if(asteroidGroup[i].gone == 0){
-                    drawAsteroid(&asteroidGroup[i]);
-                }
-            }
+
             
             checkSpaceshipCollision(pSpaceship1, asteroidGroup, bigAsteroidQuantity * 7);
             checkAsteroidCollision(asteroidGroup, bigAsteroidQuantity * 7);

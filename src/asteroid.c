@@ -12,12 +12,12 @@ void divideAsteroid(asteroid * asteroidGroup, int rootAsteroidIndex){
         asteroidGroup[rootAsteroidIndex + 1].gone = 0;
         asteroidGroup[rootAsteroidIndex + 1].sx = asteroidGroup[rootAsteroidIndex].sx + 25;
         asteroidGroup[rootAsteroidIndex + 1].sy = asteroidGroup[rootAsteroidIndex].sy;
-        asteroidGroup[rootAsteroidIndex + 1].heading = 1.5;
+        asteroidGroup[rootAsteroidIndex + 1].heading = 0.7; //0.7 bottom left
 
         asteroidGroup[rootAsteroidIndex + 2].gone = 0;
         asteroidGroup[rootAsteroidIndex + 2].sx = asteroidGroup[rootAsteroidIndex].sx - 25;
         asteroidGroup[rootAsteroidIndex + 2].sy = asteroidGroup[rootAsteroidIndex].sy;
-        asteroidGroup[rootAsteroidIndex + 2].heading = -1.5;
+        asteroidGroup[rootAsteroidIndex + 2].heading = -2.1; //-2.1 top right
 
     }
 }
@@ -60,7 +60,7 @@ void drawAsteroid(asteroid * asteroid){
     al_rotate_transform(&transform, asteroid->rotVelocity);
     al_translate_transform(&transform, asteroid->sx, asteroid->sy);
     al_use_transform(&transform);
-    //al_draw_filled_circle(0, 0, asteroid->radius, al_premul_rgba(255, 0, 0, 150));
+    al_draw_filled_circle(0, 0, asteroid->radius, al_premul_rgba(255, 0, 0, 150));
     al_draw_line(-20 * asteroid->scale,20* asteroid->scale, -25* asteroid->scale, 5* asteroid->scale, asteroid->color, 3.0f);
     al_draw_line(-25 * asteroid->scale,5 * asteroid->scale, -25 * asteroid->scale, -10* asteroid->scale, asteroid->color, 3.0f);
     al_draw_line(-25 * asteroid->scale,-10 * asteroid->scale, -5* asteroid->scale, -10* asteroid->scale, asteroid->color, 3.0f);
