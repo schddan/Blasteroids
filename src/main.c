@@ -105,6 +105,7 @@ int main (){
         }
 
     }
+
     free(asteroidGroup);
     al_destroy_display(display);
     al_uninstall_keyboard();

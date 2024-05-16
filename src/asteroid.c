@@ -7,18 +7,53 @@
 #include <math.h>
 #include <stdio.h>
 
-void divideAsteroid(asteroid * asteroidGroup, int rootAsteroidIndex){
-    if(rootAsteroidIndex == 0 || rootAsteroidIndex % 7 == 0){
-        asteroidGroup[rootAsteroidIndex + 1].gone = 0;
-        asteroidGroup[rootAsteroidIndex + 1].sx = asteroidGroup[rootAsteroidIndex].sx + 25;
-        asteroidGroup[rootAsteroidIndex + 1].sy = asteroidGroup[rootAsteroidIndex].sy;
-        asteroidGroup[rootAsteroidIndex + 1].heading = 0.7; //0.7 bottom left
+void divideAsteroidByBlast(asteroid * asteroidGroup, int rootAsteroidIndex1){
+    if(rootAsteroidIndex1 == 0 || rootAsteroidIndex1 % 7 == 0){
+        asteroidGroup[rootAsteroidIndex1 + 1].gone = 0;
+        asteroidGroup[rootAsteroidIndex1 + 1].color = al_map_rgb(0, 255,0);
+        asteroidGroup[rootAsteroidIndex1 + 1].sx = asteroidGroup[rootAsteroidIndex1].sx + 25;
+        asteroidGroup[rootAsteroidIndex1 + 1].sy = asteroidGroup[rootAsteroidIndex1].sy;
+        asteroidGroup[rootAsteroidIndex1 + 1].heading = 0.7;
 
-        asteroidGroup[rootAsteroidIndex + 2].gone = 0;
-        asteroidGroup[rootAsteroidIndex + 2].sx = asteroidGroup[rootAsteroidIndex].sx - 25;
-        asteroidGroup[rootAsteroidIndex + 2].sy = asteroidGroup[rootAsteroidIndex].sy;
-        asteroidGroup[rootAsteroidIndex + 2].heading = -2.1; //-2.1 top right
+        asteroidGroup[rootAsteroidIndex1 + 2].gone = 0;
+        asteroidGroup[rootAsteroidIndex1 + 2].color = al_map_rgb(255, 0, 0);
+        asteroidGroup[rootAsteroidIndex1 + 2].sx = asteroidGroup[rootAsteroidIndex1].sx - 25;
+        asteroidGroup[rootAsteroidIndex1 + 2].sy = asteroidGroup[rootAsteroidIndex1].sy;
+        asteroidGroup[rootAsteroidIndex1 + 2].heading = -0.7;
 
+        //2.1 top right
+        //-2.1 top left
+        //0.7 bottom right
+        //-0.7 bottom left
+    }
+}
+
+void divideAsteroidByCollision(asteroid * asteroidGroup, int rootAsteroidIndex1, int rootAsteroidIndex2){
+    if(asteroidGroup[rootAsteroidIndex2].scale != 0.5){
+        asteroidGroup[rootAsteroidIndex1 + 1].gone = 0;
+        asteroidGroup[rootAsteroidIndex1 + 1].color = al_map_rgb(0, 255,0);
+        asteroidGroup[rootAsteroidIndex1 + 1].sx = asteroidGroup[rootAsteroidIndex1].sx + 25;
+        asteroidGroup[rootAsteroidIndex1 + 1].sy = asteroidGroup[rootAsteroidIndex1].sy;
+        asteroidGroup[rootAsteroidIndex1 + 1].heading = 0.7;
+
+        asteroidGroup[rootAsteroidIndex1 + 2].gone = 0;
+        asteroidGroup[rootAsteroidIndex1 + 2].color = al_map_rgb(255, 0, 0);
+        asteroidGroup[rootAsteroidIndex1 + 2].sx = asteroidGroup[rootAsteroidIndex1].sx - 25;
+        asteroidGroup[rootAsteroidIndex1 + 2].sy = asteroidGroup[rootAsteroidIndex1].sy;
+        asteroidGroup[rootAsteroidIndex1 + 2].heading = -0.7;
+    }
+        if(asteroidGroup[rootAsteroidIndex2].scale != 0.5){
+        asteroidGroup[rootAsteroidIndex2 + 1].gone = 0;
+        asteroidGroup[rootAsteroidIndex2 + 1].color = al_map_rgb(0, 255,0);
+        asteroidGroup[rootAsteroidIndex2 + 1].sx = asteroidGroup[rootAsteroidIndex2].sx + 25;
+        asteroidGroup[rootAsteroidIndex2 + 1].sy = asteroidGroup[rootAsteroidIndex2].sy;
+        asteroidGroup[rootAsteroidIndex2 + 1].heading = 2.1;
+
+        asteroidGroup[rootAsteroidIndex2 + 2].gone = 0;
+        asteroidGroup[rootAsteroidIndex2 + 2].color = al_map_rgb(255, 0, 0);
+        asteroidGroup[rootAsteroidIndex2 + 2].sx = asteroidGroup[rootAsteroidIndex2].sx - 25;
+        asteroidGroup[rootAsteroidIndex2 + 2].sy = asteroidGroup[rootAsteroidIndex2].sy;
+        asteroidGroup[rootAsteroidIndex2 + 2].heading = -2.1;
     }
 }
 
@@ -133,8 +168,7 @@ void checkAsteroidCollision(asteroid *asteroid, int asteroidQuantity){
             if(distance < asteroid[i].radius + asteroid[j].radius && asteroid[i].gone == 0 && asteroid[j].gone == 0){
                 asteroid[i].gone = 1;
                 asteroid[j].gone = 1;
-                divideAsteroid(asteroid, i);
-                divideAsteroid(asteroid, j);
+                divideAsteroidByCollision(asteroid, i, j);
             }
         }
     }

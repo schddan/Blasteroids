@@ -19,7 +19,7 @@ struct asteroid
 
 typedef struct asteroid asteroid;
 
-void divideAsteroid(asteroid * asteroidGroup, int rootAsteroidIndex);
+void divideAsteroidByBlast(asteroid * asteroidGroup, int rootAsteroidIndex);
 void drawAsteroid(asteroid * asteroid);
 asteroid createAsteroid(ALLEGRO_COLOR color, float scale);
 asteroid * createAsteroidGroup(int quantity);
