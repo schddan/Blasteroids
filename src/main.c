@@ -83,7 +83,7 @@ int main (){
             
             al_clear_to_color(al_map_rgb(0,0,0));
             if(Spaceship1.gone != 1){
-                drawShip(pSpaceship1);
+                drawShip(pSpaceship1);  
             }
             for(int i = 0; i < bigAsteroidQuantity * 7; i++){
                 if(asteroidGroup[i].gone == 0){
@@ -93,7 +93,7 @@ int main (){
             if(Blast1.gone != 1){
                 Blast1.sy -= Blast1.speed * cos(Blast1.heading);
                 Blast1.sx += Blast1.speed * sin(Blast1.heading);
-                drawBlast(pBlast1, pSpaceship1);
+                drawBlast(pBlast1);
                 checkBlastCollision(pBlast1, asteroidGroup, bigAsteroidQuantity * 7);
             }
             

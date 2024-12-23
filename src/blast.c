@@ -4,7 +4,7 @@
 #include <allegro5/allegro_primitives.h>
 #include <math.h>
 
-void drawBlast(blast *blast, spaceship *spaceship){
+void drawBlast(blast *blast){
     ALLEGRO_TRANSFORM transform;
 
     al_identity_transform(&transform);
@@ -29,7 +29,7 @@ void checkBlastCollision(blast*  blast, asteroid *asteroid, int asteroidQuantity
     float distance;
     for(int i = 0; i < asteroidQuantity; i++){
         distance = sqrt(pow(blast->sx - asteroid[i].sx, 2) + pow(blast->sy- asteroid[i].sy, 2));
-        if(distance < blast->radius + asteroid[i].radius && asteroid[i].gone == 0){
+        if(distance < blast->radius + asteroid[i].radius && asteroid[i].gone == 0 && blast->gone == 0){
             blast->gone = 1;
             asteroid[i].gone = 1;
             divideAsteroidByBlast(asteroid, i);

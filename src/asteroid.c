@@ -7,19 +7,22 @@
 #include <math.h>
 #include <stdio.h>
 
+float RandomFloat(float min, float max){
+   return ((max - min) * ((float)rand() / RAND_MAX)) + min;
+}
 void divideAsteroidByBlast(asteroid * asteroidGroup, int rootAsteroidIndex1){
     if(rootAsteroidIndex1 == 0 || rootAsteroidIndex1 % 7 == 0){
-        asteroidGroup[rootAsteroidIndex1 + 1].gone = 0;
+        asteroidGroup[rootAsteroidIndex1 + 1].gone = false;
         asteroidGroup[rootAsteroidIndex1 + 1].color = al_map_rgb(0, 255,0);
         asteroidGroup[rootAsteroidIndex1 + 1].sx = asteroidGroup[rootAsteroidIndex1].sx + 25;
         asteroidGroup[rootAsteroidIndex1 + 1].sy = asteroidGroup[rootAsteroidIndex1].sy;
-        asteroidGroup[rootAsteroidIndex1 + 1].heading = 0.7;
+        asteroidGroup[rootAsteroidIndex1 + 1].heading = RandomFloat(-45, 45)*3.141592/180;
 
-        asteroidGroup[rootAsteroidIndex1 + 2].gone = 0;
+        asteroidGroup[rootAsteroidIndex1 + 2].gone = false;
         asteroidGroup[rootAsteroidIndex1 + 2].color = al_map_rgb(255, 0, 0);
         asteroidGroup[rootAsteroidIndex1 + 2].sx = asteroidGroup[rootAsteroidIndex1].sx - 25;
         asteroidGroup[rootAsteroidIndex1 + 2].sy = asteroidGroup[rootAsteroidIndex1].sy;
-        asteroidGroup[rootAsteroidIndex1 + 2].heading = -0.7;
+        asteroidGroup[rootAsteroidIndex1 + 2].heading = RandomFloat(135, 225)*3.141592/180;
 
         //2.1 top right
         //-2.1 top left
@@ -57,9 +60,6 @@ void divideAsteroidByCollision(asteroid * asteroidGroup, int rootAsteroidIndex1,
     }
 }
 
-float RandomFloat(float min, float max){
-   return ((max - min) * ((float)rand() / RAND_MAX)) + min;
-}
 
 void definePositionAndHeading(asteroid * asteroid){
     int quadrant = rand() % 4 + 1; //random number beetween 1 to 4
@@ -108,8 +108,8 @@ void drawAsteroid(asteroid * asteroid){
     al_draw_line(20 * asteroid->scale,10* asteroid->scale, 10* asteroid->scale, 20* asteroid->scale, asteroid->color, 3.0f);
     al_draw_line(10 * asteroid->scale,20* asteroid->scale, 0* asteroid->scale, 15* asteroid->scale, asteroid->color, 3.0f);
     al_draw_line(0 * asteroid->scale,15* asteroid->scale, -20* asteroid->scale, 20* asteroid->scale, asteroid->color, 3.0f);
-    asteroid->sx += asteroid->speed * sin(asteroid->heading);
-    asteroid->sy+= asteroid->speed * cos(asteroid->heading);
+    asteroid->sx += asteroid->speed * cos(asteroid->heading);
+    asteroid->sy+= asteroid->speed * sin(asteroid->heading);
     asteroid->rotVelocity += 0.05 * asteroid->rotationDirection;
     if(asteroid->sx > DISPLAY_WIDTH || asteroid->sx < 0 || asteroid->sy > DISPLAY_HEIGHT || asteroid -> sy < 0){
         definePositionAndHeading(asteroid);
