@@ -19,6 +19,6 @@ typedef struct blast blast;
 
 void drawBlast(blast *blast);
 void createBlast(blast *blast);
-void checkBlastCollision(blast*  blast, asteroid *asteroid, int asteroidQuantity);
+void checkBlastCollision(blast*  blast, asteroid **asteroid, int asteroidQuantity);
 
 #endif
