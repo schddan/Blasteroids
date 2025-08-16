@@ -18,7 +18,8 @@ struct spaceship
 typedef struct spaceship spaceship;
 
 void drawShip(spaceship* spaceship);
-void createSpaceship(spaceship * spaceship, ALLEGRO_COLOR color, float speed);
+void createSpaceship(spaceship * spaceship, ALLEGRO_COLOR color, float speed, float positionX, float positionY);
 void checkSpaceshipCollision(spaceship *spaceship, asteroid **asteroid, int asteroidQuantity);
+void createSpaceshipGroup(spaceship **spaceshipGroup, int quantity);
 
 #endif

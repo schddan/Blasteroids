@@ -19,12 +19,12 @@ void drawShip(spaceship *spaceship)
     // al_draw_filled_circle(0, 0, spaceship->radius, al_premul_rgba(255, 0, 0, 150));
 }
 
-void createSpaceship(spaceship *spaceship, ALLEGRO_COLOR color, float speed)
+void createSpaceship(spaceship *spaceship, ALLEGRO_COLOR color, float speed, float positionX, float positionY)
 {
     spaceship->color = color;
     spaceship->gone = 0;
-    spaceship->sx = DISPLAY_WIDTH / 2;
-    spaceship->sy = DISPLAY_HEIGHT / 2;
+    spaceship->sx = positionX;
+    spaceship->sy = positionY;
     spaceship->speed = speed;
     spaceship->heading = 0;
     spaceship->radius = 9;
@@ -42,6 +42,27 @@ void checkSpaceshipCollision(spaceship *spaceship, asteroid **asteroid, int aste
             {
                 spaceship->gone = 1;
             }
+        }
+    }
+}
+
+void createSpaceshipGroup(spaceship **spaceshipGroup, int quantity)
+{
+    for (int i = 0; i < quantity; i++)
+    {
+        spaceshipGroup[i] = (spaceship *)malloc(sizeof(spaceship));
+        if (spaceshipGroup[i] == NULL)
+        {
+            fprintf(stderr, "Memory allocation failed for spaceship group.\n");
+            exit(EXIT_FAILURE);
+        }
+        if (i == 0)
+        {
+            createSpaceship(spaceshipGroup[i], al_map_rgb(0, 255, 0), 2, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2);
+        }
+        else
+        {
+            createSpaceship(spaceshipGroup[i], al_map_rgb(255, 0, 0), 2, 20 + (i - 1) *30, 40 );
         }
     }
 }
