@@ -36,13 +36,13 @@ void divideAsteroidByBlast(asteroid *asteroidGroup, int rootAsteroidIndex)
     }
 
     asteroidGroup[sonAsteroidIndex].gone = false;
-    asteroidGroup[sonAsteroidIndex].color = al_map_rgb(0, 255, 0);
+    //asteroidGroup[sonAsteroidIndex].color = al_map_rgb(0, 255, 0);
     asteroidGroup[sonAsteroidIndex].sx = asteroidGroup[rootAsteroidIndex].sx + 25;
     asteroidGroup[sonAsteroidIndex].sy = asteroidGroup[rootAsteroidIndex].sy;
     asteroidGroup[sonAsteroidIndex].heading = RandomFloat(-45, 45) * 3.141592 / 180;
 
     asteroidGroup[sonAsteroidIndex2].gone = false;
-    asteroidGroup[sonAsteroidIndex2].color = al_map_rgb(255, 0, 0);
+    //asteroidGroup[sonAsteroidIndex2].color = al_map_rgb(255, 0, 0);
     asteroidGroup[sonAsteroidIndex2].sx = asteroidGroup[rootAsteroidIndex].sx - 25;
     asteroidGroup[sonAsteroidIndex2].sy = asteroidGroup[rootAsteroidIndex].sy;
     asteroidGroup[sonAsteroidIndex2].heading = RandomFloat(135, 225) * 3.141592 / 180;
@@ -92,21 +92,21 @@ void definePositionAndHeading(asteroid *asteroid)
     {
     case 1: // Top
         asteroid->sx = rand() % DISPLAY_WIDTH;
-        asteroid->sy = 0;
+        asteroid->sy = 0 - asteroid->radius;
         asteroid->heading = RandomFloat(3.1, 6.2); // 180º to 360º
         break;
     case 2: // Right
-        asteroid->sx = DISPLAY_WIDTH;
+        asteroid->sx = DISPLAY_WIDTH + asteroid->radius;
         asteroid->sy = rand() % DISPLAY_HEIGHT;
         asteroid->heading = RandomFloat(1.5, 4.7); // 90º to 270º
         break;
     case 3: // Bottom
         asteroid->sx = rand() % DISPLAY_WIDTH;
-        asteroid->sy = DISPLAY_HEIGHT;
+        asteroid->sy = DISPLAY_HEIGHT + asteroid->radius;
         asteroid->heading = RandomFloat(0, 3.1); // 0º to 180º
         break;
     case 4: // Left
-        asteroid->sx = 0;
+        asteroid->sx = 0 - asteroid->radius;
         asteroid->sy = rand() % DISPLAY_HEIGHT;
         asteroid->heading = RandomFloat(1.5, -1.5); // 90º to -90º (270º)
         break;
@@ -120,7 +120,7 @@ void drawAsteroid(asteroid *asteroid)
     al_rotate_transform(&transform, asteroid->rotVelocity);
     al_translate_transform(&transform, asteroid->sx, asteroid->sy);
     al_use_transform(&transform);
-    al_draw_filled_circle(0, 0, asteroid->radius, al_premul_rgba(255, 0, 0, 150));
+    //al_draw_filled_circle(0, 0, asteroid->radius, al_premul_rgba(255, 0, 0, 150));
     al_draw_line(-20 * asteroid->scale, 20 * asteroid->scale, -25 * asteroid->scale, 5 * asteroid->scale, asteroid->color, 3.0f);
     al_draw_line(-25 * asteroid->scale, 5 * asteroid->scale, -25 * asteroid->scale, -10 * asteroid->scale, asteroid->color, 3.0f);
     al_draw_line(-25 * asteroid->scale, -10 * asteroid->scale, -5 * asteroid->scale, -10 * asteroid->scale, asteroid->color, 3.0f);
@@ -136,7 +136,7 @@ void drawAsteroid(asteroid *asteroid)
     asteroid->sx += asteroid->speed * cos(asteroid->heading);
     asteroid->sy += asteroid->speed * sin(asteroid->heading);
     asteroid->rotVelocity += 0.05 * asteroid->rotationDirection;
-    if (asteroid->sx > DISPLAY_WIDTH || asteroid->sx < 0 || asteroid->sy > DISPLAY_HEIGHT || asteroid->sy < 0)
+    if (asteroid->sx > DISPLAY_WIDTH + asteroid->radius || asteroid->sx < 0 - asteroid->radius || asteroid->sy > DISPLAY_HEIGHT + asteroid->radius  || asteroid->sy < 0 - asteroid->radius)
     {
         definePositionAndHeading(asteroid);
     }

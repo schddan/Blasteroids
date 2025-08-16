@@ -41,7 +41,7 @@ int main()
     blast *pBlast1 = &Blast1;
     createBlast(pBlast1);
 
-    int bigAsteroidQuantity = 3;
+    int bigAsteroidQuantity = 6;
     asteroid **asteroidGroup = createAsteroidGroup(bigAsteroidQuantity);
 
     int running = 1;
