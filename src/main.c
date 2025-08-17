@@ -22,7 +22,7 @@ int main()
 
     display = al_create_display(DISPLAY_HEIGHT, DISPLAY_WIDTH);
     queue = al_create_event_queue();
-    timer = al_create_timer(1.0 / 60);
+    timer = al_create_timer(1.0 / FPS);
 
     al_install_keyboard();
     al_install_mouse();
@@ -34,13 +34,15 @@ int main()
 
     // Main game loop
 
-    
     spaceship *spaceshipGroup[SPACESHIP_LIVES];
-    createSpaceshipGroup(spaceshipGroup, SPACESHIP_LIVES); 
+    createSpaceshipGroup(spaceshipGroup, SPACESHIP_LIVES);
 
-    blast Blast1;
-    blast *pBlast1 = &Blast1;
-    createBlast(pBlast1);
+    blast *blastListHead = NULL; // Initialize the head of the blast list to NULL
+    blast **pBlastListHead = &blastListHead;
+    // blast Blast1;
+    // blast *pBlast1 = &Blast1;
+    // createBlast(pBlast1);
+    int blastTimer = 0;
 
     int bigAsteroidQuantity = 6;
     int currentSpaceshipIndex = 0;
@@ -70,30 +72,43 @@ int main()
                 spaceshipGroup[currentSpaceshipIndex]->sy -= spaceshipGroup[currentSpaceshipIndex]->speed * cos(spaceshipGroup[currentSpaceshipIndex]->heading);
                 spaceshipGroup[currentSpaceshipIndex]->sx += spaceshipGroup[currentSpaceshipIndex]->speed * sin(spaceshipGroup[currentSpaceshipIndex]->heading);
             }
+
             if (al_key_down(&keystate, ALLEGRO_KEY_S))
             {
                 spaceshipGroup[currentSpaceshipIndex]->sy += spaceshipGroup[currentSpaceshipIndex]->speed * cos(spaceshipGroup[currentSpaceshipIndex]->heading);
                 spaceshipGroup[currentSpaceshipIndex]->sx -= spaceshipGroup[currentSpaceshipIndex]->speed * sin(spaceshipGroup[currentSpaceshipIndex]->heading);
             }
+
             if (al_key_down(&keystate, ALLEGRO_KEY_A))
             {
                 spaceshipGroup[currentSpaceshipIndex]->heading -= 0.07;
             }
+
             if (al_key_down(&keystate, ALLEGRO_KEY_D))
             {
                 spaceshipGroup[currentSpaceshipIndex]->heading += 0.07;
             }
-            if (al_key_down(&keystate, ALLEGRO_KEY_SPACE))
+
+            if (al_key_down(&keystate, ALLEGRO_KEY_SPACE) && blastTimer <= 0)
             {
-                Blast1.gone = 0;
-                Blast1.sx = spaceshipGroup[currentSpaceshipIndex]->sx;
-                Blast1.sy = spaceshipGroup[currentSpaceshipIndex]->sy;
-                Blast1.heading = spaceshipGroup[currentSpaceshipIndex]->heading;
+                blastTimer = BLAST_INITIAL_TIMER;
+                handleBlastList(&blastListHead, spaceshipGroup[currentSpaceshipIndex]->sx, spaceshipGroup[currentSpaceshipIndex]->sy, spaceshipGroup[currentSpaceshipIndex]->heading);
+                // if (blastListHead == NULL)
+                // {
+                //     blastListHead = (blast *)malloc(sizeof(blast));
+                //     createBlast(blastListHead);
+                //     printf("%i, %f\n", blastListHead->radius, blastListHead->sx);
+                //     blastListHead->gone = 0;
+                //     blastListHead->sx = spaceshipGroup[currentSpaceshipIndex]->sx;
+                //     blastListHead->sy = spaceshipGroup[currentSpaceshipIndex]->sy;
+                //     blastListHead->heading = spaceshipGroup[currentSpaceshipIndex]->heading;
+                // }
             }
 
             al_clear_to_color(al_map_rgb(0, 0, 0));
+
             if (spaceshipGroup[currentSpaceshipIndex]->gone != 1)
-            {   
+            {
                 drawShip(&*spaceshipGroup[currentSpaceshipIndex]);
             }
             for (int i = 0; i < bigAsteroidQuantity; i++)
@@ -107,17 +122,12 @@ int main()
                     }
                 }
             }
-            if (Blast1.gone != 1)
-            {
-                Blast1.sy -= Blast1.speed * cos(Blast1.heading);
-                Blast1.sx += Blast1.speed * sin(Blast1.heading);
-                drawBlast(pBlast1);
-                checkBlastCollision(pBlast1, asteroidGroup, bigAsteroidQuantity);
-            }
+
+            handleActiveBlastsMovement(&blastListHead);
 
             checkSpaceshipCollision(spaceshipGroup[currentSpaceshipIndex], asteroidGroup, bigAsteroidQuantity);
-            //checkAsteroidCollision(asteroidGroup, bigAsteroidQuantity);
-            if(spaceshipGroup[currentSpaceshipIndex]->gone == 1)
+            // checkAsteroidCollision(asteroidGroup, bigAsteroidQuantity);
+            if (spaceshipGroup[currentSpaceshipIndex]->gone == 1)
             {
                 currentSpaceshipIndex++;
                 if (currentSpaceshipIndex >= SPACESHIP_LIVES)
@@ -125,19 +135,20 @@ int main()
                     printf("Game Over!\n");
                     running = 0;
                 }
-                spaceshipGroup[currentSpaceshipIndex] -> sx = DISPLAY_WIDTH / 2;
-                spaceshipGroup[currentSpaceshipIndex] -> sy = DISPLAY_HEIGHT / 2;
+                spaceshipGroup[currentSpaceshipIndex]->sx = DISPLAY_WIDTH / 2;
+                spaceshipGroup[currentSpaceshipIndex]->sy = DISPLAY_HEIGHT / 2;
             }
             drawShip(spaceshipGroup[1]);
             drawShip(spaceshipGroup[2]);
             drawShip(spaceshipGroup[3]);
+            blastTimer--;
             al_flip_display();
         }
     }
 
     freeAsteroidGroup(asteroidGroup, bigAsteroidQuantity);
-    //Must free spaceshipGroup too
-    //Must free blast too
+    // Must free spaceshipGroup too
+    // Must free blast too
     al_destroy_display(display);
     al_uninstall_keyboard();
     al_destroy_timer(timer);
