@@ -89,28 +89,27 @@ void handleBlastList(blast **blastListHead, float positionX, float positionY, fl
         currentBlast->nextBlast = newBlast;
     }
 }
-void removeBlast(blast **blastToRemove)
-{
-    if (blastToRemove != NULL)
-    {
 
-    }
-}
-
-void checkBlastCollision(blast *blast, asteroid **asteroid, int asteroidQuantity)
+void checkBlastCollision(blast **blastListHead, asteroid **asteroid, int asteroidQuantity, int *points)
 {
     float distance;
-    for (int i = 0; i < asteroidQuantity; i++)
+    blast *currentBlast = *blastListHead;
+    while (currentBlast != NULL)
     {
-        for (int j = 0; j < 7; j++)
+        for (int i = 0; i < asteroidQuantity; i++)
         {
-            distance = sqrt(pow(blast->sx - asteroid[i][j].sx, 2) + pow(blast->sy - asteroid[i][j].sy, 2));
-            if (distance < blast->radius + asteroid[i][j].radius && asteroid[i][j].gone == 0 && blast->gone == 0)
+            for (int j = 0; j < 7; j++)
             {
-                blast->gone = 1;
-                asteroid[i][j].gone = 1;
-                divideAsteroidByBlast(asteroid[i], j);
+                distance = sqrt(pow(currentBlast->sx - asteroid[i][j].sx, 2) + pow(currentBlast->sy - asteroid[i][j].sy, 2));
+                if (distance < currentBlast->radius + asteroid[i][j].radius && asteroid[i][j].gone == 0 && currentBlast->gone == 0)
+                {
+                    currentBlast->gone = 1;
+                    asteroid[i][j].gone = 1;
+                    divideAsteroidByBlast(asteroid[i], j);
+                    *points += 100;
+                }
             }
         }
+        currentBlast = currentBlast->nextBlast;
     }
 }
