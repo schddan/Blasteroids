@@ -121,18 +121,18 @@ void drawAsteroid(asteroid *asteroid)
     al_translate_transform(&transform, asteroid->sx, asteroid->sy);
     al_use_transform(&transform);
     //al_draw_filled_circle(0, 0, asteroid->radius, al_premul_rgba(255, 0, 0, 150));
-    al_draw_line(-20 * asteroid->scale, 20 * asteroid->scale, -25 * asteroid->scale, 5 * asteroid->scale, asteroid->color, 3.0f);
-    al_draw_line(-25 * asteroid->scale, 5 * asteroid->scale, -25 * asteroid->scale, -10 * asteroid->scale, asteroid->color, 3.0f);
-    al_draw_line(-25 * asteroid->scale, -10 * asteroid->scale, -5 * asteroid->scale, -10 * asteroid->scale, asteroid->color, 3.0f);
-    al_draw_line(-5 * asteroid->scale, -10 * asteroid->scale, -10 * asteroid->scale, -20 * asteroid->scale, asteroid->color, 3.0f);
-    al_draw_line(-10 * asteroid->scale, -20 * asteroid->scale, 5 * asteroid->scale, -20 * asteroid->scale, asteroid->color, 3.0f);
-    al_draw_line(5 * asteroid->scale, -20 * asteroid->scale, 20 * asteroid->scale, -10 * asteroid->scale, asteroid->color, 3.0f);
-    al_draw_line(20 * asteroid->scale, -10 * asteroid->scale, 20 * asteroid->scale, -5 * asteroid->scale, asteroid->color, 3.0f);
-    al_draw_line(20 * asteroid->scale, -5 * asteroid->scale, 0 * asteroid->scale, -0 * asteroid->scale, asteroid->color, 3.0f);
-    al_draw_line(0 * asteroid->scale, 0 * asteroid->scale, 20 * asteroid->scale, 10 * asteroid->scale, asteroid->color, 3.0f);
-    al_draw_line(20 * asteroid->scale, 10 * asteroid->scale, 10 * asteroid->scale, 20 * asteroid->scale, asteroid->color, 3.0f);
-    al_draw_line(10 * asteroid->scale, 20 * asteroid->scale, 0 * asteroid->scale, 15 * asteroid->scale, asteroid->color, 3.0f);
-    al_draw_line(0 * asteroid->scale, 15 * asteroid->scale, -20 * asteroid->scale, 20 * asteroid->scale, asteroid->color, 3.0f);
+    al_draw_line(-20 * asteroid->scale, 20 * asteroid->scale, -25 * asteroid->scale, 5 * asteroid->scale, asteroid->color, 2.0f);
+    al_draw_line(-25 * asteroid->scale, 5 * asteroid->scale, -25 * asteroid->scale, -10 * asteroid->scale, asteroid->color, 2.0f);
+    al_draw_line(-25 * asteroid->scale, -10 * asteroid->scale, -5 * asteroid->scale, -10 * asteroid->scale, asteroid->color, 2.0f);
+    al_draw_line(-5 * asteroid->scale, -10 * asteroid->scale, -10 * asteroid->scale, -20 * asteroid->scale, asteroid->color, 2.0f);
+    al_draw_line(-10 * asteroid->scale, -20 * asteroid->scale, 5 * asteroid->scale, -20 * asteroid->scale, asteroid->color, 2.0f);
+    al_draw_line(5 * asteroid->scale, -20 * asteroid->scale, 20 * asteroid->scale, -10 * asteroid->scale, asteroid->color, 2.0f);
+    al_draw_line(20 * asteroid->scale, -10 * asteroid->scale, 20 * asteroid->scale, -5 * asteroid->scale, asteroid->color, 2.0f);
+    al_draw_line(20 * asteroid->scale, -5 * asteroid->scale, 0 * asteroid->scale, -0 * asteroid->scale, asteroid->color, 2.0f);
+    al_draw_line(0 * asteroid->scale, 0 * asteroid->scale, 20 * asteroid->scale, 10 * asteroid->scale, asteroid->color, 2.0f);
+    al_draw_line(20 * asteroid->scale, 10 * asteroid->scale, 10 * asteroid->scale, 20 * asteroid->scale, asteroid->color, 2.0f);
+    al_draw_line(10 * asteroid->scale, 20 * asteroid->scale, 0 * asteroid->scale, 15 * asteroid->scale, asteroid->color, 2.0f);
+    al_draw_line(0 * asteroid->scale, 15 * asteroid->scale, -20 * asteroid->scale, 20 * asteroid->scale, asteroid->color, 2.0f);
     asteroid->sx += asteroid->speed * cos(asteroid->heading);
     asteroid->sy += asteroid->speed * sin(asteroid->heading);
     asteroid->rotVelocity += 0.05 * asteroid->rotationDirection;
@@ -187,7 +187,7 @@ asteroid **createAsteroidGroup(int quantity)
             {
                 scale = 0.35; 
             }
-            asteroidGroupHeads[i][j] = createAsteroid(al_map_rgb(0, 0, 255), scale);
+            asteroidGroupHeads[i][j] = createAsteroid(al_map_rgb(ASTEROID_COLOR), scale);
         }
     }
     return asteroidGroupHeads;

@@ -1,6 +1,8 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_ttf.h>
+#include <allegro5/allegro_font.h>
 #include <math.h>
 #include "spaceship.h"
 #include "blast.h"
@@ -9,20 +11,38 @@
 #include <stdio.h>
 #include "collisions.h"
 
+void defineTextPosition(float sx, float sy)
+{
+    ALLEGRO_TRANSFORM transform;
+    al_identity_transform(&transform);
+    //al_rotate_transform(&transform, asteroid->rotVelocity);
+    al_translate_transform(&transform, sx, sy);
+    al_use_transform(&transform);
+}
+
 int main()
 {
-
     // Allegro configs
     ALLEGRO_DISPLAY *display;
     ALLEGRO_EVENT_QUEUE *queue;
     ALLEGRO_TIMER *timer;
-
+    ALLEGRO_FONT *pointsFont;
+    char *workingDirectory = al_get_current_directory();
+    printf("%s", workingDirectory);
+    
     al_init();
     al_init_primitives_addon();
-
+    al_init_ttf_addon();
+    al_init_font_addon();
+    
     display = al_create_display(DISPLAY_HEIGHT, DISPLAY_WIDTH);
     queue = al_create_event_queue();
     timer = al_create_timer(1.0 / FPS);
+    pointsFont = al_load_font(FONT, 25, 0);
+    if (pointsFont == NULL)
+    {
+        printf("NULL\n");
+    }
 
     al_install_keyboard();
     al_install_mouse();
@@ -97,10 +117,6 @@ int main()
 
             al_clear_to_color(al_map_rgb(0, 0, 0));
 
-            if (spaceshipGroup[currentSpaceshipIndex]->gone != 1)
-            {
-                drawShip(&*spaceshipGroup[currentSpaceshipIndex]);
-            }
             for (int i = 0; i < bigAsteroidQuantity; i++)
             {
                 for (int j = 0; j < 7; j++)
@@ -118,6 +134,10 @@ int main()
             checkSpaceshipCollision(spaceshipGroup[currentSpaceshipIndex], asteroidGroup, bigAsteroidQuantity);
             checkBlastCollision(&blastListHead, asteroidGroup, bigAsteroidQuantity, &points);
             // checkAsteroidCollision(asteroidGroup, bigAsteroidQuantity);
+            if (spaceshipGroup[currentSpaceshipIndex]->gone != 1)
+            {
+                drawShip(&*spaceshipGroup[currentSpaceshipIndex]);
+            }
             if (spaceshipGroup[currentSpaceshipIndex]->gone == 1)
             {
                 currentSpaceshipIndex++;
@@ -126,17 +146,21 @@ int main()
                     printf("Game Over!\n");
                     running = 0;
                 }
-                if(running){
+                if (running)
+                {
 
                     spaceshipGroup[currentSpaceshipIndex]->sx = DISPLAY_WIDTH / 2;
                     spaceshipGroup[currentSpaceshipIndex]->sy = DISPLAY_HEIGHT / 2;
                 }
             }
+
+            defineTextPosition(12, 17);
+            al_draw_textf(pointsFont, al_map_rgb(WHITE_COLOR), 0, 0, 0, "%d", points);
+
             drawShip(spaceshipGroup[1]);
             drawShip(spaceshipGroup[2]);
             drawShip(spaceshipGroup[3]);
             blastTimer--;
-            printf("%i\n", points);
             al_flip_display();
         }
     }
@@ -146,6 +170,8 @@ int main()
     al_destroy_display(display);
     al_uninstall_keyboard();
     al_destroy_timer(timer);
+    al_destroy_font(pointsFont);
+    al_free(workingDirectory);
 
     return 0;
 }

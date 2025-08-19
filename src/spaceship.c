@@ -12,10 +12,10 @@ void drawShip(spaceship *spaceship)
     al_rotate_transform(&transform, spaceship->heading);
     al_translate_transform(&transform, spaceship->sx, spaceship->sy);
     al_use_transform(&transform);
-    al_draw_line(-8, 9, 0, -11, spaceship->color, 3.0f);
-    al_draw_line(0, -11, 8, 9, spaceship->color, 3.0f);
-    al_draw_line(-6, 4, -1, 4, spaceship->color, 3.0f);
-    al_draw_line(6, 4, 1, 4, spaceship->color, 3.0f);
+    al_draw_line(-8, 9, 0, -11, spaceship->color, 2.0f);
+    al_draw_line(0, -11, 8, 9, spaceship->color, 2.0f);
+    al_draw_line(-6, 4, -1, 4, spaceship->color, 2.0f);
+    al_draw_line(6, 4, 1, 4, spaceship->color, 2.0f);
     // al_draw_filled_circle(0, 0, spaceship->radius, al_premul_rgba(255, 0, 0, 150));
 }
 
@@ -51,18 +51,13 @@ void createSpaceshipGroup(spaceship **spaceshipGroup, int quantity)
     for (int i = 0; i < quantity; i++)
     {
         spaceshipGroup[i] = (spaceship *)malloc(sizeof(spaceship));
-        if (spaceshipGroup[i] == NULL)
-        {
-            fprintf(stderr, "Memory allocation failed for spaceship group.\n");
-            exit(EXIT_FAILURE);
-        }
         if (i == 0)
         {
-            createSpaceship(spaceshipGroup[i], al_map_rgb(0, 255, 0), 2, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2);
+            createSpaceship(spaceshipGroup[i], al_map_rgb(SPACESHIP_COLOR), 2, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2);
         }
         else
         {
-            createSpaceship(spaceshipGroup[i], al_map_rgb(255, 0, 0), 2, 20 + (i - 1) *30, 40 );
+            createSpaceship(spaceshipGroup[i], al_map_rgb(SPACESHIP_COLOR), 2, 80 - (i - 1) *30, 70 );
         }
     }
 }
