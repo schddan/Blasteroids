@@ -133,10 +133,9 @@ int main()
 
             checkSpaceshipCollision(spaceshipGroup[currentSpaceshipIndex], asteroidGroup, bigAsteroidQuantity);
             checkBlastCollision(&blastListHead, asteroidGroup, bigAsteroidQuantity, &points);
-            // checkAsteroidCollision(asteroidGroup, bigAsteroidQuantity);
             if (spaceshipGroup[currentSpaceshipIndex]->gone != 1)
             {
-                drawShip(&*spaceshipGroup[currentSpaceshipIndex]);
+                drawShip(spaceshipGroup[currentSpaceshipIndex]);
             }
             if (spaceshipGroup[currentSpaceshipIndex]->gone == 1)
             {
@@ -156,10 +155,7 @@ int main()
 
             defineTextPosition(12, 17);
             al_draw_textf(pointsFont, al_map_rgb(WHITE_COLOR), 0, 0, 0, "%d", points);
-
-            drawShip(spaceshipGroup[1]);
-            drawShip(spaceshipGroup[2]);
-            drawShip(spaceshipGroup[3]);
+            drawSpaceshipLives(spaceshipGroup, SPACESHIP_LIVES);
             blastTimer--;
             al_flip_display();
         }

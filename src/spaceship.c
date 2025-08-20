@@ -12,10 +12,10 @@ void drawShip(spaceship *spaceship)
     al_rotate_transform(&transform, spaceship->heading);
     al_translate_transform(&transform, spaceship->sx, spaceship->sy);
     al_use_transform(&transform);
-    al_draw_line(-8, 9, 0, -11, spaceship->color, 2.0f);
-    al_draw_line(0, -11, 8, 9, spaceship->color, 2.0f);
-    al_draw_line(-6, 4, -1, 4, spaceship->color, 2.0f);
-    al_draw_line(6, 4, 1, 4, spaceship->color, 2.0f);
+    al_draw_line(-8, 9, 0, -11, spaceship->color, 1.0f);
+    al_draw_line(0, -11, 8, 9, spaceship->color, 1.0f);
+    al_draw_line(-6, 4, -1, 4, spaceship->color, 1.0f);
+    al_draw_line(6, 4, 1, 4, spaceship->color, 1.0f);
     // al_draw_filled_circle(0, 0, spaceship->radius, al_premul_rgba(255, 0, 0, 150));
 }
 
@@ -57,7 +57,16 @@ void createSpaceshipGroup(spaceship **spaceshipGroup, int quantity)
         }
         else
         {
-            createSpaceship(spaceshipGroup[i], al_map_rgb(SPACESHIP_COLOR), 2, 80 - (i - 1) *30, 70 );
+            createSpaceship(spaceshipGroup[i], al_map_rgb(SPACESHIP_COLOR), 2, 80 - (i - 1) * 30, 70);
         }
+    }
+}
+
+void drawSpaceshipLives(spaceship **spaceshipGroup, int quantity)
+{
+    for (int i = 1; i < SPACESHIP_LIVES; i++){
+        if(!spaceshipGroup[i]->gone)
+            drawShip(spaceshipGroup[i]);
+
     }
 }
