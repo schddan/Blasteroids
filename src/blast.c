@@ -14,8 +14,7 @@ void drawBlast(blast *blast)
     al_rotate_transform(&transform, blast->heading);
     al_translate_transform(&transform, blast->sx, blast->sy);
     al_use_transform(&transform);
-    // al_draw_filled_circle(0, 0, blast->radius, blast->color);
-    al_draw_line(0, 0, 0, 10, al_map_rgb(BLAST_COLOR), 3);
+    al_draw_line(0, 0, 0, 10, al_map_rgb(BLAST_COLOR), 1.5);
 }
 
 void handleActiveBlastsMovement(blast **blastListHead)

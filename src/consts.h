@@ -6,7 +6,7 @@
 #define FPS 60
 #define SPACESHIP_LIVES 4
 #define BLAST_INITIAL_TIMER 10
-#define FONT "/home/dan/Documentos/Blasteroids/src/GeostarFill.ttf"
+#define FONT "/home/dan/Documentos/Blasteroids/src/assets/GeostarFill.ttf"
 #define WHITE_COLOR 255,255,255
 #define SPACESHIP_COLOR WHITE_COLOR
 #define ASTEROID_COLOR WHITE_COLOR

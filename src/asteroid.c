@@ -36,13 +36,11 @@ void divideAsteroidByBlast(asteroid *asteroidGroup, int rootAsteroidIndex)
     }
 
     asteroidGroup[sonAsteroidIndex].gone = false;
-    //asteroidGroup[sonAsteroidIndex].color = al_map_rgb(0, 255, 0);
     asteroidGroup[sonAsteroidIndex].sx = asteroidGroup[rootAsteroidIndex].sx + 25;
     asteroidGroup[sonAsteroidIndex].sy = asteroidGroup[rootAsteroidIndex].sy;
     asteroidGroup[sonAsteroidIndex].heading = RandomFloat(-45, 45) * 3.141592 / 180;
 
     asteroidGroup[sonAsteroidIndex2].gone = false;
-    //asteroidGroup[sonAsteroidIndex2].color = al_map_rgb(255, 0, 0);
     asteroidGroup[sonAsteroidIndex2].sx = asteroidGroup[rootAsteroidIndex].sx - 25;
     asteroidGroup[sonAsteroidIndex2].sy = asteroidGroup[rootAsteroidIndex].sy;
     asteroidGroup[sonAsteroidIndex2].heading = RandomFloat(135, 225) * 3.141592 / 180;
@@ -51,38 +49,6 @@ void divideAsteroidByBlast(asteroid *asteroidGroup, int rootAsteroidIndex)
     //-2.1 top left
     // 0.7 bottom right
     //-0.7 bottom left
-}
-
-void divideAsteroidByCollision(asteroid *asteroidGroup, int rootAsteroidIndex1, int rootAsteroidIndex2)
-{
-    if (asteroidGroup[rootAsteroidIndex2].scale != 0.5)
-    {
-        asteroidGroup[rootAsteroidIndex1 + 1].gone = 0;
-        asteroidGroup[rootAsteroidIndex1 + 1].color = al_map_rgb(0, 255, 0);
-        asteroidGroup[rootAsteroidIndex1 + 1].sx = asteroidGroup[rootAsteroidIndex1].sx + 25;
-        asteroidGroup[rootAsteroidIndex1 + 1].sy = asteroidGroup[rootAsteroidIndex1].sy;
-        asteroidGroup[rootAsteroidIndex1 + 1].heading = 0.7;
-
-        asteroidGroup[rootAsteroidIndex1 + 2].gone = 0;
-        asteroidGroup[rootAsteroidIndex1 + 2].color = al_map_rgb(255, 0, 0);
-        asteroidGroup[rootAsteroidIndex1 + 2].sx = asteroidGroup[rootAsteroidIndex1].sx - 25;
-        asteroidGroup[rootAsteroidIndex1 + 2].sy = asteroidGroup[rootAsteroidIndex1].sy;
-        asteroidGroup[rootAsteroidIndex1 + 2].heading = -0.7;
-    }
-    if (asteroidGroup[rootAsteroidIndex2].scale != 0.5)
-    {
-        asteroidGroup[rootAsteroidIndex2 + 1].gone = 0;
-        asteroidGroup[rootAsteroidIndex2 + 1].color = al_map_rgb(0, 255, 0);
-        asteroidGroup[rootAsteroidIndex2 + 1].sx = asteroidGroup[rootAsteroidIndex2].sx + 25;
-        asteroidGroup[rootAsteroidIndex2 + 1].sy = asteroidGroup[rootAsteroidIndex2].sy;
-        asteroidGroup[rootAsteroidIndex2 + 1].heading = 2.1;
-
-        asteroidGroup[rootAsteroidIndex2 + 2].gone = 0;
-        asteroidGroup[rootAsteroidIndex2 + 2].color = al_map_rgb(255, 0, 0);
-        asteroidGroup[rootAsteroidIndex2 + 2].sx = asteroidGroup[rootAsteroidIndex2].sx - 25;
-        asteroidGroup[rootAsteroidIndex2 + 2].sy = asteroidGroup[rootAsteroidIndex2].sy;
-        asteroidGroup[rootAsteroidIndex2 + 2].heading = -2.1;
-    }
 }
 
 void definePositionAndHeading(asteroid *asteroid)
@@ -148,7 +114,7 @@ asteroid createAsteroid(ALLEGRO_COLOR color, float scale)
     definePositionAndHeading(&asteroid);
     int randomDirection = rand() % 2 + 1;
     asteroid.rotationDirection = (randomDirection == 1) ? 1 : -1; // If quadrant == 1, rotationDirection = 1, else rotationDirection = -1
-    asteroid.speed = 0.8;
+    asteroid.speed = 1.6;
     asteroid.rotVelocity = 0.07;
     asteroid.scale = scale;
     if (scale == 1.0)
@@ -193,27 +159,6 @@ asteroid **createAsteroidGroup(int quantity)
     return asteroidGroupHeads;
 }
 
-void checkAsteroidCollision(asteroid *asteroid, int asteroidQuantity)
-{
-    float distance;
-    for (int i = 0; i < asteroidQuantity; i++)
-    {
-        for (int j = 0; j < asteroidQuantity; j++)
-        {
-            if (j == i)
-            {
-                continue;
-            }
-            distance = sqrt(pow(asteroid[i].sx - asteroid[j].sx, 2) + pow(asteroid[i].sy - asteroid[j].sy, 2));
-            if (distance < asteroid[i].radius + asteroid[j].radius && asteroid[i].gone == 0 && asteroid[j].gone == 0)
-            {
-                // asteroid[i].gone = 1;
-                // asteroid[j].gone = 1;
-                // divideAsteroidByCollision(asteroid, i, j);
-            }
-        }
-    }
-}
 
 void freeAsteroidGroup(asteroid **asteroidGroupHeads, int quantity)
 {

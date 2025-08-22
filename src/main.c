@@ -15,7 +15,6 @@ void defineTextPosition(float sx, float sy)
 {
     ALLEGRO_TRANSFORM transform;
     al_identity_transform(&transform);
-    //al_rotate_transform(&transform, asteroid->rotVelocity);
     al_translate_transform(&transform, sx, sy);
     al_use_transform(&transform);
 }
@@ -28,7 +27,6 @@ int main()
     ALLEGRO_TIMER *timer;
     ALLEGRO_FONT *pointsFont;
     char *workingDirectory = al_get_current_directory();
-    printf("%s", workingDirectory);
     
     al_init();
     al_init_primitives_addon();
@@ -39,10 +37,6 @@ int main()
     queue = al_create_event_queue();
     timer = al_create_timer(1.0 / FPS);
     pointsFont = al_load_font(FONT, 25, 0);
-    if (pointsFont == NULL)
-    {
-        printf("NULL\n");
-    }
 
     al_install_keyboard();
     al_install_mouse();
@@ -50,24 +44,20 @@ int main()
     al_register_event_source(queue, al_get_keyboard_event_source());       // Handles events from keyboard
     al_register_event_source(queue, al_get_mouse_event_source());          // Handles events from mouse
     al_register_event_source(queue, al_get_display_event_source(display)); // Handles events from display
-    al_register_event_source(queue, al_get_timer_event_source(timer));
+    al_register_event_source(queue, al_get_timer_event_source(timer));     // Handles timer
 
     // Main game loop
-
     spaceship *spaceshipGroup[SPACESHIP_LIVES];
     createSpaceshipGroup(spaceshipGroup, SPACESHIP_LIVES);
+    int currentSpaceshipIndex = 0;
 
     blast *blastListHead = NULL; // Initialize the head of the blast list to NULL
-    // blast Blast1;
-    // blast *pBlast1 = &Blast1;
-    // createBlast(pBlast1);
     int blastTimer = 0;
-    int points = 0;
-
+    
     int bigAsteroidQuantity = 6;
-    int currentSpaceshipIndex = 0;
     asteroid **asteroidGroup = createAsteroidGroup(bigAsteroidQuantity);
-
+    
+    int points = 0;
     int running = 1;
 
     al_start_timer(timer);
@@ -78,9 +68,7 @@ int main()
         al_wait_for_event(queue, &event);
 
         if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
-        { // Handles if the window is closed
             running = 0;
-        }
 
         ALLEGRO_KEYBOARD_STATE keystate;
         al_get_keyboard_state(&keystate);
@@ -130,7 +118,6 @@ int main()
             }
 
             handleActiveBlastsMovement(&blastListHead);
-
             checkSpaceshipCollision(spaceshipGroup[currentSpaceshipIndex], asteroidGroup, bigAsteroidQuantity);
             checkBlastCollision(&blastListHead, asteroidGroup, bigAsteroidQuantity, &points);
             if (spaceshipGroup[currentSpaceshipIndex]->gone != 1)
@@ -147,7 +134,6 @@ int main()
                 }
                 if (running)
                 {
-
                     spaceshipGroup[currentSpaceshipIndex]->sx = DISPLAY_WIDTH / 2;
                     spaceshipGroup[currentSpaceshipIndex]->sy = DISPLAY_HEIGHT / 2;
                 }
@@ -155,7 +141,7 @@ int main()
 
             defineTextPosition(12, 17);
             al_draw_textf(pointsFont, al_map_rgb(WHITE_COLOR), 0, 0, 0, "%d", points);
-            drawSpaceshipLives(spaceshipGroup, SPACESHIP_LIVES);
+            drawSpaceshipLives(spaceshipGroup, SPACESHIP_LIVES); //The game ends if the spaceship is hit in the spawn because it instantly kills the new spaceships
             blastTimer--;
             al_flip_display();
         }
