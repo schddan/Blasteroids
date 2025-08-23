@@ -21,18 +21,20 @@ void defineTextPosition(float sx, float sy)
 
 int main()
 {
+    srand(time(NULL));
+
     // Allegro configs
     ALLEGRO_DISPLAY *display;
     ALLEGRO_EVENT_QUEUE *queue;
     ALLEGRO_TIMER *timer;
     ALLEGRO_FONT *pointsFont;
     char *workingDirectory = al_get_current_directory();
-    
+
     al_init();
     al_init_primitives_addon();
     al_init_ttf_addon();
     al_init_font_addon();
-    
+
     display = al_create_display(DISPLAY_HEIGHT, DISPLAY_WIDTH);
     queue = al_create_event_queue();
     timer = al_create_timer(1.0 / FPS);
@@ -53,10 +55,10 @@ int main()
 
     blast *blastListHead = NULL; // Initialize the head of the blast list to NULL
     int blastTimer = 0;
-    
-    int bigAsteroidQuantity = 6;
-    asteroid **asteroidGroup = createAsteroidGroup(bigAsteroidQuantity);
-    
+
+    int asteroidQuantity = 6 * 7;
+    asteroid *asteroidGroup = createAsteroidGroup(asteroidQuantity);
+
     int points = 0;
     int running = 1;
 
@@ -105,21 +107,17 @@ int main()
 
             al_clear_to_color(al_map_rgb(0, 0, 0));
 
-            for (int i = 0; i < bigAsteroidQuantity; i++)
+            for (int i = 0; i < asteroidQuantity; i++)
             {
-                for (int j = 0; j < 7; j++)
+                if (asteroidGroup[i].gone == 0)
                 {
-
-                    if (asteroidGroup[i][j].gone == 0)
-                    {
-                        drawAsteroid(&asteroidGroup[i][j]);
-                    }
+                    drawAsteroid(&asteroidGroup[i]);
                 }
             }
 
             handleActiveBlastsMovement(&blastListHead);
-            checkSpaceshipCollision(spaceshipGroup[currentSpaceshipIndex], asteroidGroup, bigAsteroidQuantity);
-            checkBlastCollision(&blastListHead, asteroidGroup, bigAsteroidQuantity, &points);
+            checkSpaceshipCollision(spaceshipGroup[currentSpaceshipIndex], asteroidGroup, asteroidQuantity);
+            checkBlastCollision(&blastListHead, asteroidGroup, asteroidQuantity, &points);
             if (spaceshipGroup[currentSpaceshipIndex]->gone != 1)
             {
                 drawShip(spaceshipGroup[currentSpaceshipIndex]);
@@ -141,14 +139,14 @@ int main()
 
             defineTextPosition(12, 17);
             al_draw_textf(pointsFont, al_map_rgb(WHITE_COLOR), 0, 0, 0, "%d", points);
-            drawSpaceshipLives(spaceshipGroup, SPACESHIP_LIVES); //The game ends if the spaceship is hit in the spawn because it instantly kills the new spaceships
+            drawSpaceshipLives(spaceshipGroup, SPACESHIP_LIVES); // The game ends if the spaceship is hit in the spawn because it instantly kills the new spaceships
             blastTimer--;
             al_flip_display();
         }
     }
 
-    freeAsteroidGroup(asteroidGroup, bigAsteroidQuantity);
-    // Must free spaceshipGroup too
+    // freeAsteroidGroup(asteroidGroup, bigAsteroidQuantity);
+    //  Must free spaceshipGroup too
     al_destroy_display(display);
     al_uninstall_keyboard();
     al_destroy_timer(timer);

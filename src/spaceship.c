@@ -30,15 +30,15 @@ void createSpaceship(spaceship *spaceship, ALLEGRO_COLOR color, float speed, flo
     spaceship->radius = 9;
 }
 
-void checkSpaceshipCollision(spaceship *spaceship, asteroid **asteroid, int asteroidQuantity)
+void checkSpaceshipCollision(spaceship *spaceship, asteroid *asteroidGroup, int asteroidQuantity)
 {
     float distance;
     for (int i = 0; i < asteroidQuantity; i++)
     {
         for (int j = 0; j < 7; j++)
         {
-            distance = sqrt(pow(spaceship->sx - asteroid[i][j].sx, 2) + pow(spaceship->sy - asteroid[i][j].sy, 2));
-            if (distance < spaceship->radius + asteroid[i][j].radius && asteroid[i][j].gone == 0)
+            distance = sqrt(pow(spaceship->sx - asteroidGroup[i].sx, 2) + pow(spaceship->sy - asteroidGroup[i].sy, 2));
+            if (distance < spaceship->radius + asteroidGroup[i].radius && asteroidGroup[i].gone == 0)
             {
                 spaceship->gone = 1;
             }

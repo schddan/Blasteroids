@@ -27,10 +27,10 @@ struct asteroidList
 typedef struct asteroid asteroid;
 typedef struct asteroidList asteroidList;
 
-void divideAsteroidByBlast(asteroid * asteroidGroup, int rootAsteroidIndex);
+void divideAsteroidByBlast(asteroid * asteroidGroup, int rootAsteroidIndex, int asteroidQuantity);
 void drawAsteroid(asteroid * asteroid);
 asteroid createAsteroid(ALLEGRO_COLOR color, float scale);
-asteroid ** createAsteroidGroup(int quantity);
+asteroid * createAsteroidGroup(int quantity);
 void freeAsteroidGroup(asteroid **asteroidGroupHeads, int quantity);
 
 #endif
