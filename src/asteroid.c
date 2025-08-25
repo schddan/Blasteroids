@@ -18,6 +18,7 @@ void divideAsteroidByBlast(asteroid *asteroidGroup, int rootAsteroidIndex, int a
     {
         return;
     }
+
     int childrenCreated = 0;
 
     for (int i = 0; i < asteroidQuantity; i++)
@@ -147,12 +148,42 @@ asteroid *createAsteroidGroup(int quantity)
     return asteroidGroup;
 }
 
-void freeAsteroidGroup(asteroid **asteroidGroupHeads, int quantity)
+
+
+void handleAsteroidActivation(asteroid *asteroidGroup, int *pAsteroidQuantity)
 {
-    for (int i = 0; i < quantity; i++)
+    int asteroidQuantity = *pAsteroidQuantity;
+    int goneCount = 0;
+    for (int i = 0; i < asteroidQuantity; i++)
     {
-        free(asteroidGroupHeads[i]); // Free each asteroid group
+        if (asteroidGroup[i].gone == true)
+        {
+            goneCount++;
+        }
     }
-    free(asteroidGroupHeads);  // Free the array of pointers
-    asteroidGroupHeads = NULL; // Set to NULL to avoid dangling pointer
+    printf("%i\n", goneCount);
+
+    // printf("%i\n", goneCount);
+    int size = rand() % 3 + 1; // random number between 1 to 3
+    for (int i = 0; i < asteroidQuantity; i++)
+    {
+        if (asteroidGroup[i].gone == true)
+        {
+            asteroidGroup[i].gone = false;
+            definePositionAndHeading(&asteroidGroup[i]);
+            if (size == 1)
+            {
+                asteroidGroup[i].scale = SMALL_ASTEROID_SCALE;
+            }
+            else if (size == 2)
+            {
+                asteroidGroup[i].scale = MEDIUM_ASTEROID_SCALE;
+            }
+            else if (size == 3)
+            {
+                asteroidGroup[i].scale = BIG_ASTEROID_SCALE;
+            }
+            break;
+        }
+    }
 }

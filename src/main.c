@@ -28,7 +28,6 @@ int main()
     ALLEGRO_EVENT_QUEUE *queue;
     ALLEGRO_TIMER *timer;
     ALLEGRO_FONT *pointsFont;
-    char *workingDirectory = al_get_current_directory();
 
     al_init();
     al_init_primitives_addon();
@@ -56,10 +55,13 @@ int main()
     blast *blastListHead = NULL; // Initialize the head of the blast list to NULL
     int blastTimer = 0;
 
-    int asteroidQuantity = 6 * 7;
+    int asteroidQuantity = 1 * 7;
     asteroid *asteroidGroup = createAsteroidGroup(asteroidQuantity);
+    int activateAsteroidTimer = ACTIVATE_ASTEROID_INITIAL_TIMER;
 
     int points = 0;
+    float difficultyMultiplier = 0.0; // Increases from 0.0 to 0.5
+    int difficultyJustChanged = 0;
     int running = 1;
 
     al_start_timer(timer);
@@ -107,6 +109,22 @@ int main()
 
             al_clear_to_color(al_map_rgb(0, 0, 0));
 
+            if (activateAsteroidTimer == 0)
+            {
+                handleAsteroidActivation(asteroidGroup, &asteroidQuantity);
+                activateAsteroidTimer = ACTIVATE_ASTEROID_INITIAL_TIMER - ACTIVATE_ASTEROID_INITIAL_TIMER * difficultyMultiplier;
+            }
+
+            if (points % 2000 == 100)
+            {
+                difficultyJustChanged = false;
+            }
+            if (points >= 2000 && points % 2000 == 0 && difficultyMultiplier < 0.5 && difficultyJustChanged == false)
+            {
+                difficultyMultiplier += 0.1;
+                difficultyJustChanged = true;
+            }
+
             for (int i = 0; i < asteroidQuantity; i++)
             {
                 if (asteroidGroup[i].gone == 0)
@@ -141,17 +159,17 @@ int main()
             al_draw_textf(pointsFont, al_map_rgb(WHITE_COLOR), 0, 0, 0, "%d", points);
             drawSpaceshipLives(spaceshipGroup, SPACESHIP_LIVES); // The game ends if the spaceship is hit in the spawn because it instantly kills the new spaceships
             blastTimer--;
+            activateAsteroidTimer--;
             al_flip_display();
         }
     }
 
-    // freeAsteroidGroup(asteroidGroup, bigAsteroidQuantity);
+    free(asteroidGroup);
     //  Must free spaceshipGroup too
     al_destroy_display(display);
     al_uninstall_keyboard();
     al_destroy_timer(timer);
     al_destroy_font(pointsFont);
-    al_free(workingDirectory);
 
     return 0;
 }
