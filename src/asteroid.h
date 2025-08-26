@@ -31,8 +31,8 @@ void divideAsteroidByBlast(asteroid * asteroidGroup, int rootAsteroidIndex, int 
 void drawAsteroid(asteroid * asteroid);
 asteroid createAsteroid(ALLEGRO_COLOR color, float scale);
 asteroid * createAsteroidGroup(int quantity);
-void reallocAsteroidGroup(asteroid **asteroidGroup, int *pAsteroidQuantity);
-void handleAsteroidActivation(asteroid *asteroidGroup, int *pAsteroidQuantity);
+void reallocAsteroidGroup(asteroid **pAsteroidGroup, int *pAsteroidQuantity);
+void handleAsteroidActivation(asteroid **pAsteroidGroup, int *pAsteroidQuantity);
 
 #endif
 

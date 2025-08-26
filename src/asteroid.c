@@ -148,41 +148,60 @@ asteroid *createAsteroidGroup(int quantity)
     return asteroidGroup;
 }
 
+void reallocAsteroidGroup(asteroid **pAsteroidGroup, int *pAsteroidQuantity)
+{
+    int oldAsteroidQuantity = *pAsteroidQuantity;
+    *pAsteroidQuantity = oldAsteroidQuantity + 7;
+
+    asteroid *newAsteroidGroup = calloc(*pAsteroidQuantity, sizeof(asteroid));
+
+    for (int i = 0; i < oldAsteroidQuantity; i++)
+    {
+        newAsteroidGroup[i] = (*pAsteroidGroup)[i];
+    }
+
+    for (int i = oldAsteroidQuantity; i < *pAsteroidQuantity; i++)
+    {
+        newAsteroidGroup[i] = createAsteroid(al_map_rgb(WHITE_COLOR), BIG_ASTEROID_SCALE);
+    }
+
+    free(*pAsteroidGroup);
+    *pAsteroidGroup = newAsteroidGroup;
+}
 
 
-void handleAsteroidActivation(asteroid *asteroidGroup, int *pAsteroidQuantity)
+void handleAsteroidActivation(asteroid **pAsteroidGroup, int *pAsteroidQuantity)
 {
     int asteroidQuantity = *pAsteroidQuantity;
     int goneCount = 0;
+
     for (int i = 0; i < asteroidQuantity; i++)
     {
-        if (asteroidGroup[i].gone == true)
+        if ((*pAsteroidGroup)[i].gone == true)
         {
             goneCount++;
         }
     }
-    printf("%i\n", goneCount);
+    if (goneCount <= 2)
+    {  
+        reallocAsteroidGroup(pAsteroidGroup, pAsteroidQuantity);
+    }
 
-    // printf("%i\n", goneCount);
-    int size = rand() % 3 + 1; // random number between 1 to 3
-    for (int i = 0; i < asteroidQuantity; i++)
+    int size = rand() % 3 + 1;
+    for (int i = 0; i < *pAsteroidQuantity; i++)
     {
-        if (asteroidGroup[i].gone == true)
+        if ((*pAsteroidGroup)[i].gone == true)
         {
-            asteroidGroup[i].gone = false;
-            definePositionAndHeading(&asteroidGroup[i]);
+            (*pAsteroidGroup)[i].gone = false;
+            definePositionAndHeading(&(*pAsteroidGroup)[i]);
+
             if (size == 1)
-            {
-                asteroidGroup[i].scale = SMALL_ASTEROID_SCALE;
-            }
+                (*pAsteroidGroup)[i].scale = SMALL_ASTEROID_SCALE;
             else if (size == 2)
-            {
-                asteroidGroup[i].scale = MEDIUM_ASTEROID_SCALE;
-            }
-            else if (size == 3)
-            {
-                asteroidGroup[i].scale = BIG_ASTEROID_SCALE;
-            }
+                (*pAsteroidGroup)[i].scale = MEDIUM_ASTEROID_SCALE;
+            else
+                (*pAsteroidGroup)[i].scale = BIG_ASTEROID_SCALE;
+
             break;
         }
     }

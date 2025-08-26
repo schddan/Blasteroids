@@ -55,7 +55,7 @@ int main()
     blast *blastListHead = NULL; // Initialize the head of the blast list to NULL
     int blastTimer = 0;
 
-    int asteroidQuantity = 1 * 7;
+    int asteroidQuantity = 6 * 7;
     asteroid *asteroidGroup = createAsteroidGroup(asteroidQuantity);
     int activateAsteroidTimer = ACTIVATE_ASTEROID_INITIAL_TIMER;
 
@@ -111,7 +111,7 @@ int main()
 
             if (activateAsteroidTimer == 0)
             {
-                handleAsteroidActivation(asteroidGroup, &asteroidQuantity);
+                handleAsteroidActivation(&asteroidGroup, &asteroidQuantity);
                 activateAsteroidTimer = ACTIVATE_ASTEROID_INITIAL_TIMER - ACTIVATE_ASTEROID_INITIAL_TIMER * difficultyMultiplier;
             }
 
