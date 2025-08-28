@@ -51,6 +51,8 @@ int main()
     spaceship *spaceshipGroup[SPACESHIP_LIVES];
     createSpaceshipGroup(spaceshipGroup, SPACESHIP_LIVES);
     int currentSpaceshipIndex = 0;
+    int spaceshipInvencibilityTimer = 0;
+    int spaceshipInvencibilityBlinkingFrequency = 0;
 
     blast *blastListHead = NULL; // Initialize the head of the blast list to NULL
     int blastTimer = 0;
@@ -134,11 +136,21 @@ int main()
             }
 
             handleActiveBlastsMovement(&blastListHead);
-            checkSpaceshipCollision(spaceshipGroup[currentSpaceshipIndex], asteroidGroup, asteroidQuantity);
+            checkSpaceshipCollision(spaceshipGroup[currentSpaceshipIndex], asteroidGroup, asteroidQuantity, &spaceshipInvencibilityTimer, &spaceshipInvencibilityBlinkingFrequency); // Must make the spaceship blink in order to show the player the invencibility
             checkBlastCollision(&blastListHead, asteroidGroup, asteroidQuantity, &points);
             if (spaceshipGroup[currentSpaceshipIndex]->gone != 1)
             {
-                drawShip(spaceshipGroup[currentSpaceshipIndex]);
+                printf("1: %i and %i\n", spaceshipInvencibilityBlinkingFrequency, spaceshipInvencibilityTimer);
+                if (spaceshipInvencibilityTimer <= 0 || spaceshipInvencibilityBlinkingFrequency > 0)
+                {
+                    drawShip(spaceshipGroup[currentSpaceshipIndex]);
+                    printf("DRAW 1\n");
+                }
+                spaceshipInvencibilityBlinkingFrequency--;
+                if (spaceshipInvencibilityBlinkingFrequency <= -10)
+                {
+                    spaceshipInvencibilityBlinkingFrequency = SPACESHIP_INVENCIBILITY_INITIAL_FREQUENCY;
+                }
             }
             if (spaceshipGroup[currentSpaceshipIndex]->gone == 1)
             {
@@ -157,7 +169,7 @@ int main()
 
             defineTextPosition(12, 17);
             al_draw_textf(pointsFont, al_map_rgb(WHITE_COLOR), 0, 0, 0, "%d", points);
-            drawSpaceshipLives(spaceshipGroup, SPACESHIP_LIVES); // The game ends if the spaceship is hit in the spawn because it instantly kills the new spaceships
+            drawSpaceshipLives(spaceshipGroup, SPACESHIP_LIVES, currentSpaceshipIndex);
             blastTimer--;
             activateAsteroidTimer--;
             al_flip_display();

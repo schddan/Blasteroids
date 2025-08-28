@@ -30,7 +30,7 @@ void createSpaceship(spaceship *spaceship, ALLEGRO_COLOR color, float speed, flo
     spaceship->radius = 9;
 }
 
-void checkSpaceshipCollision(spaceship *spaceship, asteroid *asteroidGroup, int asteroidQuantity)
+void checkSpaceshipCollision(spaceship *spaceship, asteroid *asteroidGroup, int asteroidQuantity, int *pSpaceshipInvencibilityTimer, int *pSpaceshipInvencibilityBlinkingFrequency)
 {
     float distance;
     for (int i = 0; i < asteroidQuantity; i++)
@@ -38,12 +38,16 @@ void checkSpaceshipCollision(spaceship *spaceship, asteroid *asteroidGroup, int 
         for (int j = 0; j < 7; j++)
         {
             distance = sqrt(pow(spaceship->sx - asteroidGroup[i].sx, 2) + pow(spaceship->sy - asteroidGroup[i].sy, 2));
-            if (distance < spaceship->radius + asteroidGroup[i].radius && asteroidGroup[i].gone == 0)
+            if (distance < spaceship->radius + asteroidGroup[i].radius && asteroidGroup[i].gone == 0 && *pSpaceshipInvencibilityTimer <= 0)
             {
                 spaceship->gone = 1;
+                *pSpaceshipInvencibilityTimer = SPACESHIP_INVENCIBILITY_INITIAL_TIMER;
+                *pSpaceshipInvencibilityBlinkingFrequency = SPACESHIP_INVENCIBILITY_INITIAL_FREQUENCY;
             }
         }
     }
+    (*pSpaceshipInvencibilityTimer)--;
+    //printf("%i\n", *pSpaceshipInvencibilityTimer);
 }
 
 void createSpaceshipGroup(spaceship **spaceshipGroup, int quantity)
@@ -62,9 +66,9 @@ void createSpaceshipGroup(spaceship **spaceshipGroup, int quantity)
     }
 }
 
-void drawSpaceshipLives(spaceship **spaceshipGroup, int quantity)
+void drawSpaceshipLives(spaceship **spaceshipGroup, int quantity, int currentSpaceshipIndex)
 {
-    for (int i = 1; i < SPACESHIP_LIVES; i++){
+    for (int i = currentSpaceshipIndex + 1; i < SPACESHIP_LIVES; i++){
         if(!spaceshipGroup[i]->gone)
             drawShip(spaceshipGroup[i]);
 
