@@ -22,7 +22,6 @@ typedef struct blast blast;
 void drawBlast(blast *blast);
 void handleActiveBlastsMovement(blast **blastListHead);
 void createBlast(blast *blast);
-void checkBlastCollision(blast** blastListHead, asteroid *asteroidGroup, int asteroidQuantity, int *points);
 void handleBlastList(blast **blastListHead, float positionX, float positionY, float heading);
 
 #endif

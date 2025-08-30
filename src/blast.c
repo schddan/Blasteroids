@@ -89,23 +89,3 @@ void handleBlastList(blast **blastListHead, float positionX, float positionY, fl
     }
 }
 
-void checkBlastCollision(blast **blastListHead, asteroid *asteroidGroup, int asteroidQuantity, int *points)
-{
-    float distance;
-    blast *currentBlast = *blastListHead;
-    while (currentBlast != NULL)
-    {
-        for (int i = 0; i < asteroidQuantity; i++)
-        {
-            distance = sqrt(pow(currentBlast->sx - asteroidGroup[i].sx, 2) + pow(currentBlast->sy - asteroidGroup[i].sy, 2));
-            if (distance < currentBlast->radius + asteroidGroup[i].radius && asteroidGroup[i].gone == 0 && currentBlast->gone == 0)
-            {
-                currentBlast->gone = 1;
-                divideAsteroidByBlast(asteroidGroup, i, asteroidQuantity);
-                asteroidGroup[i].gone = 1;
-                *points += 100;
-            }
-        }
-        currentBlast = currentBlast->nextBlast;
-    }
-}
