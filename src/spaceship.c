@@ -47,14 +47,12 @@ void checkSpaceshipCollision(spaceship *spaceship, asteroid *asteroidGroup, int 
         }
     }
     (*pSpaceshipInvencibilityTimer)--;
-    //printf("%i\n", *pSpaceshipInvencibilityTimer);
 }
 
 void createSpaceshipGroup(spaceship **spaceshipGroup, int quantity)
 {
     for (int i = 0; i < quantity; i++)
     {
-        spaceshipGroup[i] = (spaceship *)malloc(sizeof(spaceship));
         if (i == 0)
         {
             createSpaceship(spaceshipGroup[i], al_map_rgb(SPACESHIP_COLOR), 2, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2);

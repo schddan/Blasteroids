@@ -64,7 +64,9 @@ int main()
     int points = 0;
     float difficultyMultiplier = 0.0; // Increases from 0.0 to 0.5
     int difficultyJustChanged = 0;
-    int running = 1;
+    int running = true;
+    int started = false;
+    int gameOver = false;
 
     al_start_timer(timer);
     while (running)
@@ -81,97 +83,142 @@ int main()
 
         if (event.type == ALLEGRO_EVENT_TIMER)
         {
-            if (al_key_down(&keystate, ALLEGRO_KEY_W))
+            if (al_key_down(&keystate, ALLEGRO_KEY_ENTER))
             {
-                spaceshipGroup[currentSpaceshipIndex]->sy -= spaceshipGroup[currentSpaceshipIndex]->speed * cos(spaceshipGroup[currentSpaceshipIndex]->heading);
-                spaceshipGroup[currentSpaceshipIndex]->sx += spaceshipGroup[currentSpaceshipIndex]->speed * sin(spaceshipGroup[currentSpaceshipIndex]->heading);
+                started = true;
             }
-
-            if (al_key_down(&keystate, ALLEGRO_KEY_S))
+            if (!started && al_key_down(&keystate, ALLEGRO_KEY_Q))
             {
-                spaceshipGroup[currentSpaceshipIndex]->sy += spaceshipGroup[currentSpaceshipIndex]->speed * cos(spaceshipGroup[currentSpaceshipIndex]->heading);
-                spaceshipGroup[currentSpaceshipIndex]->sx -= spaceshipGroup[currentSpaceshipIndex]->speed * sin(spaceshipGroup[currentSpaceshipIndex]->heading);
+                running = false;
             }
-
-            if (al_key_down(&keystate, ALLEGRO_KEY_A))
+            if (gameOver && al_key_down(&keystate, ALLEGRO_KEY_ENTER))
             {
-                spaceshipGroup[currentSpaceshipIndex]->heading -= 0.07;
+                free(asteroidGroup);
+                createSpaceshipGroup(spaceshipGroup, SPACESHIP_LIVES);
+                currentSpaceshipIndex = 0;
+                spaceshipInvencibilityTimer = 0;
+                spaceshipInvencibilityBlinkingFrequency = 0;
+
+                blastTimer = 0;
+
+                asteroidQuantity = 6 * 7;
+                asteroidGroup = createAsteroidGroup(asteroidQuantity);
+                activateAsteroidTimer = ACTIVATE_ASTEROID_INITIAL_TIMER;
+
+                points = 0;
+                difficultyMultiplier = 0.0; // Increases from 0.0 to 0.5
+                difficultyJustChanged = 0;
+                running = true;
+                started = false;
+                gameOver = false;
             }
-
-            if (al_key_down(&keystate, ALLEGRO_KEY_D))
+            if (started)
             {
-                spaceshipGroup[currentSpaceshipIndex]->heading += 0.07;
-            }
-
-            if (al_key_down(&keystate, ALLEGRO_KEY_SPACE) && blastTimer <= 0)
-            {
-                blastTimer = BLAST_INITIAL_TIMER;
-                handleBlastList(&blastListHead, spaceshipGroup[currentSpaceshipIndex]->sx, spaceshipGroup[currentSpaceshipIndex]->sy, spaceshipGroup[currentSpaceshipIndex]->heading);
-            }
-
-            al_clear_to_color(al_map_rgb(0, 0, 0));
-
-            if (activateAsteroidTimer == 0)
-            {
-                handleAsteroidActivation(&asteroidGroup, &asteroidQuantity);
-                activateAsteroidTimer = ACTIVATE_ASTEROID_INITIAL_TIMER - ACTIVATE_ASTEROID_INITIAL_TIMER * difficultyMultiplier;
-            }
-
-            if (points % 2000 == 100)
-            {
-                difficultyJustChanged = false;
-            }
-            if (points >= 2000 && points % 2000 == 0 && difficultyMultiplier < 0.5 && difficultyJustChanged == false)
-            {
-                difficultyMultiplier += 0.1;
-                difficultyJustChanged = true;
-            }
-
-            for (int i = 0; i < asteroidQuantity; i++)
-            {
-                if (asteroidGroup[i].gone == 0)
+                if (al_key_down(&keystate, ALLEGRO_KEY_W))
                 {
-                    drawAsteroid(&asteroidGroup[i]);
+                    spaceshipGroup[currentSpaceshipIndex]->sy -= spaceshipGroup[currentSpaceshipIndex]->speed * cos(spaceshipGroup[currentSpaceshipIndex]->heading);
+                    spaceshipGroup[currentSpaceshipIndex]->sx += spaceshipGroup[currentSpaceshipIndex]->speed * sin(spaceshipGroup[currentSpaceshipIndex]->heading);
                 }
-            }
 
-            handleActiveBlastsMovement(&blastListHead);
-            checkSpaceshipCollision(spaceshipGroup[currentSpaceshipIndex], asteroidGroup, asteroidQuantity, &spaceshipInvencibilityTimer, &spaceshipInvencibilityBlinkingFrequency); // Must make the spaceship blink in order to show the player the invencibility
-            checkBlastCollision(&blastListHead, asteroidGroup, asteroidQuantity, &points);
-            if (spaceshipGroup[currentSpaceshipIndex]->gone != 1)
-            {
-                printf("1: %i and %i\n", spaceshipInvencibilityBlinkingFrequency, spaceshipInvencibilityTimer);
-                if (spaceshipInvencibilityTimer <= 0 || spaceshipInvencibilityBlinkingFrequency > 0)
+                if (al_key_down(&keystate, ALLEGRO_KEY_S))
                 {
-                    drawShip(spaceshipGroup[currentSpaceshipIndex]);
-                    printf("DRAW 1\n");
+                    spaceshipGroup[currentSpaceshipIndex]->sy += spaceshipGroup[currentSpaceshipIndex]->speed * cos(spaceshipGroup[currentSpaceshipIndex]->heading);
+                    spaceshipGroup[currentSpaceshipIndex]->sx -= spaceshipGroup[currentSpaceshipIndex]->speed * sin(spaceshipGroup[currentSpaceshipIndex]->heading);
                 }
-                spaceshipInvencibilityBlinkingFrequency--;
-                if (spaceshipInvencibilityBlinkingFrequency <= -10)
-                {
-                    spaceshipInvencibilityBlinkingFrequency = SPACESHIP_INVENCIBILITY_INITIAL_FREQUENCY;
-                }
-            }
-            if (spaceshipGroup[currentSpaceshipIndex]->gone == 1)
-            {
-                currentSpaceshipIndex++;
-                if (currentSpaceshipIndex >= SPACESHIP_LIVES)
-                {
-                    printf("Game Over!\n");
-                    running = 0;
-                }
-                if (running)
-                {
-                    spaceshipGroup[currentSpaceshipIndex]->sx = DISPLAY_WIDTH / 2;
-                    spaceshipGroup[currentSpaceshipIndex]->sy = DISPLAY_HEIGHT / 2;
-                }
-            }
 
-            defineTextPosition(12, 17);
-            al_draw_textf(pointsFont, al_map_rgb(WHITE_COLOR), 0, 0, 0, "%d", points);
-            drawSpaceshipLives(spaceshipGroup, SPACESHIP_LIVES, currentSpaceshipIndex);
-            blastTimer--;
-            activateAsteroidTimer--;
+                if (al_key_down(&keystate, ALLEGRO_KEY_A))
+                {
+                    spaceshipGroup[currentSpaceshipIndex]->heading -= 0.07;
+                }
+
+                if (al_key_down(&keystate, ALLEGRO_KEY_D))
+                {
+                    spaceshipGroup[currentSpaceshipIndex]->heading += 0.07;
+                }
+
+                if (al_key_down(&keystate, ALLEGRO_KEY_SPACE) && blastTimer <= 0)
+                {
+                    blastTimer = BLAST_INITIAL_TIMER;
+                    handleBlastList(&blastListHead, spaceshipGroup[currentSpaceshipIndex]->sx, spaceshipGroup[currentSpaceshipIndex]->sy, spaceshipGroup[currentSpaceshipIndex]->heading);
+                }
+
+                al_clear_to_color(al_map_rgb(0, 0, 0));
+
+                if (activateAsteroidTimer == 0)
+                {
+                    handleAsteroidActivation(&asteroidGroup, &asteroidQuantity);
+                    activateAsteroidTimer = ACTIVATE_ASTEROID_INITIAL_TIMER - ACTIVATE_ASTEROID_INITIAL_TIMER * difficultyMultiplier;
+                }
+
+                if (points % 2000 == 100)
+                {
+                    difficultyJustChanged = false;
+                }
+                if (points >= 2000 && points % 2000 == 0 && difficultyMultiplier < 0.5 && difficultyJustChanged == false)
+                {
+                    difficultyMultiplier += 0.1;
+                    difficultyJustChanged = true;
+                }
+
+                for (int i = 0; i < asteroidQuantity; i++)
+                {
+                    if (asteroidGroup[i].gone == 0)
+                    {
+                        drawAsteroid(&asteroidGroup[i]);
+                    }
+                }
+
+                handleActiveBlastsMovement(&blastListHead);
+                checkSpaceshipCollision(spaceshipGroup[currentSpaceshipIndex], asteroidGroup, asteroidQuantity, &spaceshipInvencibilityTimer, &spaceshipInvencibilityBlinkingFrequency); // Must make the spaceship blink in order to show the player the invencibility
+                checkBlastCollision(&blastListHead, asteroidGroup, asteroidQuantity, &points);
+                if (spaceshipGroup[currentSpaceshipIndex]->gone != 1)
+                {
+                    if (spaceshipInvencibilityTimer <= 0 || spaceshipInvencibilityBlinkingFrequency > 0)
+                    {
+                        drawShip(spaceshipGroup[currentSpaceshipIndex]);
+                    }
+                    spaceshipInvencibilityBlinkingFrequency--;
+                    if (spaceshipInvencibilityBlinkingFrequency <= -10)
+                    {
+                        spaceshipInvencibilityBlinkingFrequency = SPACESHIP_INVENCIBILITY_INITIAL_FREQUENCY;
+                    }
+                }
+                if (spaceshipGroup[currentSpaceshipIndex]->gone == 1)
+                {
+                    currentSpaceshipIndex++;
+                    if (currentSpaceshipIndex >= SPACESHIP_LIVES)
+                    {
+                        started = false;
+                        gameOver = true;
+                    }
+                    if (started)
+                    {
+                        spaceshipGroup[currentSpaceshipIndex]->sx = DISPLAY_WIDTH / 2;
+                        spaceshipGroup[currentSpaceshipIndex]->sy = DISPLAY_HEIGHT / 2;
+                    }
+                }
+
+                defineTextPosition(12, 17);
+                al_draw_textf(pointsFont, al_map_rgb(WHITE_COLOR), 0, 0, 0, "%d", points);
+                drawSpaceshipLives(spaceshipGroup, SPACESHIP_LIVES, currentSpaceshipIndex);
+                blastTimer--;
+                activateAsteroidTimer--;
+            }
+            else if (!started && gameOver)
+            {
+                al_clear_to_color(al_map_rgb(0, 0, 0));
+                defineTextPosition(DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 - 30);
+                al_draw_text(pointsFont, al_map_rgb(WHITE_COLOR), 0, 0, ALLEGRO_ALIGN_CENTRE, "GAME OVER");
+                defineTextPosition(DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2);
+                al_draw_textf(pointsFont, al_map_rgb(WHITE_COLOR), 0, 0, ALLEGRO_ALIGN_CENTRE, "Points: %d", points);
+                defineTextPosition(DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 + 30);
+                al_draw_text(pointsFont, al_map_rgb(WHITE_COLOR), 0, 0, ALLEGRO_ALIGN_CENTRE, "Press ENTER to restart or Q to quit");
+            }
+            else if (!started && !gameOver)
+            {
+                defineTextPosition(DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2);
+                al_draw_text(pointsFont, al_map_rgb(WHITE_COLOR), 0, 0, ALLEGRO_ALIGN_CENTRE, "Press ENTER to start or Q to quit");
+            }
             al_flip_display();
         }
     }
