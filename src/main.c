@@ -48,7 +48,7 @@ int main()
     al_register_event_source(queue, al_get_timer_event_source(timer));     // Handles timer
 
     // Main game loop
-    spaceship *spaceshipGroup[SPACESHIP_LIVES];
+    spaceship spaceshipGroup[SPACESHIP_LIVES];
     createSpaceshipGroup(spaceshipGroup, SPACESHIP_LIVES);
     int currentSpaceshipIndex = 0;
     int spaceshipInvencibilityTimer = 0;
@@ -116,30 +116,30 @@ int main()
             {
                 if (al_key_down(&keystate, ALLEGRO_KEY_W))
                 {
-                    spaceshipGroup[currentSpaceshipIndex]->sy -= spaceshipGroup[currentSpaceshipIndex]->speed * cos(spaceshipGroup[currentSpaceshipIndex]->heading);
-                    spaceshipGroup[currentSpaceshipIndex]->sx += spaceshipGroup[currentSpaceshipIndex]->speed * sin(spaceshipGroup[currentSpaceshipIndex]->heading);
+                    spaceshipGroup[currentSpaceshipIndex].sy -= spaceshipGroup[currentSpaceshipIndex].speed * cos(spaceshipGroup[currentSpaceshipIndex].heading);
+                    spaceshipGroup[currentSpaceshipIndex].sx += spaceshipGroup[currentSpaceshipIndex].speed * sin(spaceshipGroup[currentSpaceshipIndex].heading);
                 }
 
                 if (al_key_down(&keystate, ALLEGRO_KEY_S))
                 {
-                    spaceshipGroup[currentSpaceshipIndex]->sy += spaceshipGroup[currentSpaceshipIndex]->speed * cos(spaceshipGroup[currentSpaceshipIndex]->heading);
-                    spaceshipGroup[currentSpaceshipIndex]->sx -= spaceshipGroup[currentSpaceshipIndex]->speed * sin(spaceshipGroup[currentSpaceshipIndex]->heading);
+                    spaceshipGroup[currentSpaceshipIndex].sy += spaceshipGroup[currentSpaceshipIndex].speed * cos(spaceshipGroup[currentSpaceshipIndex].heading);
+                    spaceshipGroup[currentSpaceshipIndex].sx -= spaceshipGroup[currentSpaceshipIndex].speed * sin(spaceshipGroup[currentSpaceshipIndex].heading);
                 }
 
                 if (al_key_down(&keystate, ALLEGRO_KEY_A))
                 {
-                    spaceshipGroup[currentSpaceshipIndex]->heading -= 0.07;
+                    spaceshipGroup[currentSpaceshipIndex].heading -= 0.07;
                 }
 
                 if (al_key_down(&keystate, ALLEGRO_KEY_D))
                 {
-                    spaceshipGroup[currentSpaceshipIndex]->heading += 0.07;
+                    spaceshipGroup[currentSpaceshipIndex].heading += 0.07;
                 }
 
                 if (al_key_down(&keystate, ALLEGRO_KEY_SPACE) && blastTimer <= 0)
                 {
                     blastTimer = BLAST_INITIAL_TIMER;
-                    handleBlastList(&blastListHead, spaceshipGroup[currentSpaceshipIndex]->sx, spaceshipGroup[currentSpaceshipIndex]->sy, spaceshipGroup[currentSpaceshipIndex]->heading);
+                    handleBlastList(&blastListHead, spaceshipGroup[currentSpaceshipIndex].sx, spaceshipGroup[currentSpaceshipIndex].sy, spaceshipGroup[currentSpaceshipIndex].heading);
                 }
 
                 al_clear_to_color(al_map_rgb(0, 0, 0));
@@ -169,13 +169,13 @@ int main()
                 }
 
                 handleActiveBlastsMovement(&blastListHead);
-                checkSpaceshipCollision(spaceshipGroup[currentSpaceshipIndex], asteroidGroup, asteroidQuantity, &spaceshipInvencibilityTimer, &spaceshipInvencibilityBlinkingFrequency); // Must make the spaceship blink in order to show the player the invencibility
+                checkSpaceshipCollision(&spaceshipGroup[currentSpaceshipIndex], asteroidGroup, asteroidQuantity, &spaceshipInvencibilityTimer, &spaceshipInvencibilityBlinkingFrequency); // Must make the spaceship blink in order to show the player the invencibility
                 checkBlastCollision(&blastListHead, asteroidGroup, asteroidQuantity, &points);
-                if (spaceshipGroup[currentSpaceshipIndex]->gone != 1)
+                if (spaceshipGroup[currentSpaceshipIndex].gone != 1)
                 {
                     if (spaceshipInvencibilityTimer <= 0 || spaceshipInvencibilityBlinkingFrequency > 0)
                     {
-                        drawShip(spaceshipGroup[currentSpaceshipIndex]);
+                        drawShip(&spaceshipGroup[currentSpaceshipIndex]);
                     }
                     spaceshipInvencibilityBlinkingFrequency--;
                     if (spaceshipInvencibilityBlinkingFrequency <= -10)
@@ -183,7 +183,7 @@ int main()
                         spaceshipInvencibilityBlinkingFrequency = SPACESHIP_INVENCIBILITY_INITIAL_FREQUENCY;
                     }
                 }
-                if (spaceshipGroup[currentSpaceshipIndex]->gone == 1)
+                if (spaceshipGroup[currentSpaceshipIndex].gone == 1)
                 {
                     currentSpaceshipIndex++;
                     if (currentSpaceshipIndex >= SPACESHIP_LIVES)
@@ -193,8 +193,8 @@ int main()
                     }
                     if (started)
                     {
-                        spaceshipGroup[currentSpaceshipIndex]->sx = DISPLAY_WIDTH / 2;
-                        spaceshipGroup[currentSpaceshipIndex]->sy = DISPLAY_HEIGHT / 2;
+                        spaceshipGroup[currentSpaceshipIndex].sx = DISPLAY_WIDTH / 2;
+                        spaceshipGroup[currentSpaceshipIndex].sy = DISPLAY_HEIGHT / 2;
                     }
                 }
 
@@ -224,7 +224,6 @@ int main()
     }
 
     free(asteroidGroup);
-    //  Must free spaceshipGroup too
     al_destroy_display(display);
     al_uninstall_keyboard();
     al_destroy_timer(timer);

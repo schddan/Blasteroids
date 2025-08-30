@@ -49,26 +49,26 @@ void checkSpaceshipCollision(spaceship *spaceship, asteroid *asteroidGroup, int 
     (*pSpaceshipInvencibilityTimer)--;
 }
 
-void createSpaceshipGroup(spaceship **spaceshipGroup, int quantity)
+void createSpaceshipGroup(spaceship *spaceshipGroup, int quantity)
 {
     for (int i = 0; i < quantity; i++)
     {
         if (i == 0)
         {
-            createSpaceship(spaceshipGroup[i], al_map_rgb(SPACESHIP_COLOR), 2, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2);
+            createSpaceship(&(spaceshipGroup[i]), al_map_rgb(SPACESHIP_COLOR), 2, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2);
         }
         else
         {
-            createSpaceship(spaceshipGroup[i], al_map_rgb(SPACESHIP_COLOR), 2, 80 - (i - 1) * 30, 70);
+            createSpaceship(&(spaceshipGroup[i]), al_map_rgb(SPACESHIP_COLOR), 2, 80 - (i - 1) * 30, 70);
         }
     }
 }
 
-void drawSpaceshipLives(spaceship **spaceshipGroup, int quantity, int currentSpaceshipIndex)
+void drawSpaceshipLives(spaceship *spaceshipGroup, int quantity, int currentSpaceshipIndex)
 {
     for (int i = currentSpaceshipIndex + 1; i < SPACESHIP_LIVES; i++){
-        if(!spaceshipGroup[i]->gone)
-            drawShip(spaceshipGroup[i]);
+        if(!spaceshipGroup[i].gone)
+            drawShip(&(spaceshipGroup[i]));
 
     }
 }
