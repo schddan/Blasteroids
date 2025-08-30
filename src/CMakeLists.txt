@@ -9,6 +9,8 @@ link_libraries(/usr/lib/x86_64-linux-gnu/liballegro_ttf.so)
 
 add_executable(Blasteroids)
 
+file(COPY ${CMAKE_SOURCE_DIR}/assets DESTINATION ${CMAKE_BINARY_DIR})
+
 target_sources(
     Blasteroids
     PRIVATE

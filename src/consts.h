@@ -9,7 +9,7 @@
 #define ACTIVATE_ASTEROID_INITIAL_TIMER 300
 #define SPACESHIP_INVENCIBILITY_INITIAL_TIMER 150
 #define SPACESHIP_INVENCIBILITY_INITIAL_FREQUENCY 10
-#define FONT "/home/dan/Documentos/Blasteroids/src/assets/GeostarFill.ttf"
+#define FONT "assets/GeostarFill.ttf"
 #define WHITE_COLOR 255,255,255
 #define SPACESHIP_COLOR WHITE_COLOR
 #define ASTEROID_COLOR WHITE_COLOR
