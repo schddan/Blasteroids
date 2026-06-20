@@ -1,0 +1,22 @@
+The game starts when player presses ENTER
+YES
+The ship starts in the center
+YES
+D and A make the ship rotate (D -> Clockwise and A -> Counterclockwise) 
+YES
+W and S make the ship move (W -> Forward and S -> Backward) 
+YES
+Asteroids will appear randomly from the border of the screen until the player loses its lives
+YES
+The ship fires against these Asteroids 
+YES
+Every asteroid hit gives 100 points 
+YES
+There are three sizes of Asteroids (Small, Medium, Big).
+YES
+After being hit, a Big and a Medium asteroid will divide into two 
+YES
+If an asteroid hits the ship, the player loses 1 of 3 lives 
+YES
+
+
